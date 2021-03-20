@@ -11,7 +11,7 @@ const PostSchema = new Schema({
     description: String, 
     likes: Number,
     isNSFW: Boolean,
-    images: [String],
+    images: String,
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     tags: [
         {
