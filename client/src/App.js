@@ -6,8 +6,10 @@ import Scoreboard from './pages/Scoreboard'
 import Exercise from './pages/Exercise'
 import Createpost from './pages/Createpost'
 import Login from './pages/Login'
+import Register from './pages/Register'
 import Post_tag from './pages/Post_tag'
 import Navbar from './components/Navbar'
+import Navbar1 from './components/Navbar1'
 
 const App = () => {
 
@@ -15,9 +17,26 @@ const App = () => {
     
     if(!isLogedin)
         return (
-            <Login />
+            <div className={styles.container}>
+            <Router>
+                <Navbar1 />
+                <Switch>
+                    <Route path="login">
+                        <Login/>
+                    </Route>
+                    <Route path="/register">
+                        <Register />
+                    </Route>
+                    
+                    <Route path="/">
+                        <Login />
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
         )
-
+        
+        else
     return (
 
         <div className={styles.container}>

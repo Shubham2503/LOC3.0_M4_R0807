@@ -86,24 +86,7 @@ const Exercise = () => {
     // console.log(process.env.REACT_APP_API_ID)
 
 
-    const handleUpdate = async (e, results) => {
-        setSearch(e.target.value)
 
-
-        await axios.get(`https://trackapi.nutritionix.com/v2/search/instant?query=${search}`, {
-            headers: {
-                "x-app-id": process.env.REACT_APP_API_ID,
-                "x-app-key": process.env.REACT_APP_API_KEY,
-                "x-remote-user-id": process.env.REACT_APP_REMOTE_ID
-            }
-        })
-            .then(res => {
-                const temp_data = null;
-                setData(temp_data)
-            }).catch(err => {
-                console.log(err)
-            })
-    }
 
     return (
         <div className={styles.container}>
