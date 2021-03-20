@@ -1,7 +1,6 @@
 const express = require("express");
 const router = new express.Router();
 const Post = require("../models/post");
-const multer = require("multer");
 
 // endpoint to create the post
 router.post("/post/create", async (req, res) => {

@@ -32,10 +32,12 @@ const Home = () => {
     return null
     return (
         <>
+        <Container md={3} className={styles.container}>
+            <Row>
             {data.map((val, ind) => {
                     return(
-                        <div className={styles.container}>
-                            <Card style={{ width: '18rem' }}>
+                        <Col>
+                            <Card style={{ minWidth: '20rem', maxWidth: '100%', marginBottom: 10 }}>
                             <Card.Img height={180} width={100} variant="top" src={val.images} />
                             <Card.Body>
                                 <Card.Title>{val.title}</Card.Title>
@@ -55,10 +57,12 @@ const Home = () => {
                                 
                             </Card.Body>
                             </Card>
-                        </div>
+                        </Col>
                     )
                 })
             }
+            </Row>                 
+            </Container>
         </>
     )
 }
