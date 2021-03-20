@@ -136,31 +136,25 @@ const Exercise = () => {
                     <Form.Label  >So What do you had for your Meal ?? </Form.Label>
                     <Row>
                         <Col><Form.Control onChange={ipHandler1} as="textarea" rows={3} /></Col>
-
                     </Row>
-                    <Row>
-
-                        <Col>
-                            <h4>Calories Gained</h4>
-                            {calGained ? calGained : 0}
-
-                        </Col>
-                    </Row>
-
                 </Form.Group>
 
                 <Form.Group controlId="exampleForm.ControlTextarea2">
                     <Form.Label>Tell Me About Your workout session??</Form.Label>
                     <Row>
                         <Col><Form.Control onChange={ipHandler2} as="textarea" rows={3} /></Col>
-
                     </Row>
-                    <Row>
+                </Form.Group>
 
+                <Form.Group controlId="exampleForm.ControlTextarea3">
+                    <Row>
+                        <Col>
+                            <h4>Calories Gained</h4>
+                            {calGained ? calGained : 0}
+                        </Col>
                         <Col>
                             <h4>Calories Burned</h4>
                             {calLost ? calLost : 0}
-
                         </Col>
                     </Row>
 
