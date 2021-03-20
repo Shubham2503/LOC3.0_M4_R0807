@@ -1,6 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const Post = require("../models/post");
+const multer = require("multer");
 
 // endpoint to create the post
 router.post("/post/create", async (req, res) => {
@@ -13,6 +14,18 @@ router.post("/post/create", async (req, res) => {
     }
 });
 
+// router.post(
+//     "/post/create/img",
+//     upload.single("images"),
+//     async (req, res) => {
+//         req.user.images = req.file.buffer;
+//         await req.post.save();
+//         res.send();
+//     },
+//     (error, req, res, next) => {
+//         res.status(400).send({ error: error.message });
+//     }
+// );
 // endpoint to get all post of a the database
 router.get("/post/getAllPost", async (req, res) => {
     try {
