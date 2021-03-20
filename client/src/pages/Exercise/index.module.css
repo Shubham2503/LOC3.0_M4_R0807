@@ -19,6 +19,6 @@
     overflow: 'auto';
     max-height: '50%';
   }
-.form {
-    color: green !important;
-  }
+.toast {
+    background-color: #007bff;
+}
