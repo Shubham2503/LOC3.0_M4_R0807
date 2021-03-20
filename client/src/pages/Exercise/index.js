@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styles from './index.module.css'
-import { Form, Row, Col, Button, Toast } from 'react-bootstrap'
+import { Form, Row, Col, Button } from 'react-bootstrap'
 import axios from 'axios'
+import Chart from '../../components/Chart'
 
 const Exercise = () => {
     const [meal, setMeal] = useState("")
@@ -9,9 +10,7 @@ const Exercise = () => {
     const [disp, setDisp] = useState("")
     const [calGained, setCalG] = useState(null)
     const [calLost, setCalL] = useState(null)
-    
-    const [score,setScore] = useState(0)
-
+    const [score, setScore] = useState(0)
 
     const fetchMeal = async () => {
 
@@ -29,7 +28,7 @@ const Exercise = () => {
                 const temp_data = res.data.foods.map((val, ind) => {
                     return val.nf_calories
                 }).reduce((el, ac) => (el + ac))
-              //  console.log(temp_data)
+                //  console.log(temp_data)
                 setCalG(temp_data)
 
             }).catch(err => {
@@ -39,7 +38,7 @@ const Exercise = () => {
     }
     const fetchEx = async () => {
         const params = new URLSearchParams()
-        params.append('query', 'squats')
+        params.append('query', ex)
         await axios.post(`https://trackapi.nutritionix.com/v2/natural/exercise`, params, {
             headers: {
                 "x-app-id": process.env.REACT_APP_API_ID,
@@ -52,7 +51,7 @@ const Exercise = () => {
                 const temp_data = res.data.exercises.map((val, ind) => {
                     return val.nf_calories
                 }).reduce((el, ac) => (el + ac))
-              //  console.log(temp_data)
+                //  console.log(temp_data)
                 setCalL(temp_data)
             }).catch(err => {
                 console.log(err)
@@ -64,7 +63,7 @@ const Exercise = () => {
         //console.log("worked")
         await fetchMeal();
         await fetchEx();
-        setScore((+calLost/+calGained).toFixed(2))
+        setScore((+calLost / +calGained).toFixed(2))
 
     }
     const submit = () => {
@@ -140,53 +139,41 @@ const Exercise = () => {
              </Form.Group>  */}
 
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label  >So What do you had for your Meal ?? </Form.Label>
                     <Row>
-                        <Col><Form.Control onChange={ipHandler1} as="textarea" rows={3} /></Col>
-
+                        <Col>
+                            <Form.Label  >So What do you had for your Meal ?? </Form.Label>
+                            <Row>
+                                <Col><Form.Control onChange={ipHandler1} as="textarea" rows={3} /></Col>
+                            </Row>
+                        </Col>
+                        <Col>
+                            <Form.Label>Tell Me About Your workout session??</Form.Label>
+                            <Row>
+                                <Col><Form.Control onChange={ipHandler2} as="textarea" rows={3} /></Col>
+                            </Row>
+                        </Col>
                     </Row>
-                    <Row>
+                </Form.Group>
 
+                <Form.Group controlId="exampleForm.ControlTextarea3">
+                    <Row>
                         <Col>
                             <h4>Calories Gained</h4>
                             {calGained ? calGained : 0}
 
                         </Col>
-                    </Row>
-
-                </Form.Group>
-
-                <Form.Group controlId="exampleForm.ControlTextarea2">
-                    <Form.Label>Tell Me About Your workout session??</Form.Label>
-                    <Row>
-                        <Col><Form.Control onChange={ipHandler2} as="textarea" rows={3} /></Col>
-
-                    </Row>
-                    <Row>
-
                         <Col>
                             <h4>Calories Burned</h4>
                             {calLost ? calLost : 0}
-
                         </Col>
                     </Row>
-
                 </Form.Group>
+
                 <Button onClick={calculate} variant="primary">Calculate</Button>{' '}
                 <Button onClick={submit} variant="success">Submit</Button>{' '}
 
             </Form>
-            <div className = {styles.toast}>
-            <Toast >
-                <Toast.Header>
-                    <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                    <strong className="mr-auto">Total Calories Burned !!</strong>
-                    
-                </Toast.Header>
-                <Toast.Body>You haved burned {calLost ? calLost : 0} Calories</Toast.Body>
-            </Toast>
-            </div>
-           
+            <Chart gain={calGained} loss={calLost} />
 
 
         </div>

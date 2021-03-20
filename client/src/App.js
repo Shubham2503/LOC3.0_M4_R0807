@@ -11,7 +11,8 @@ import Navbar from './components/Navbar'
 
 const App = () => {
 
-    const [isLogedin, setIsLogedin] = useState(false)
+    const [isLogedin, setIsLogedin] = useState(true)
+    
     if(!isLogedin)
         return (
             <Login />
