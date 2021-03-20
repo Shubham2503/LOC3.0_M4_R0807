@@ -8,7 +8,7 @@ import axios from 'axios'
 
 
 const Login = (props) => {
-    const [success,setSuccess] = useState("")
+    const [success,setSuccess] = useState(false)
     const [email,setEmail] = useState("")
     const [pass,setPass] = useState("")
     const inp1 = (e) =>{
@@ -30,13 +30,17 @@ const Login = (props) => {
         })
             .then(res => {
                 const temp_data = res.data;
-                if(temp_data.email)
-                {
-                    
-                }
-                is_loaded(true)
+                console.log(temp_data)
+               
+                    console.log("redirect ho kaminee")
+                    setSuccess(true)
+                    console.log(success)
+                    is_loaded(true)
+               
+
             }).catch(err => {
                 console.log(err)
+                setSuccess(false)
             })
 
     }
