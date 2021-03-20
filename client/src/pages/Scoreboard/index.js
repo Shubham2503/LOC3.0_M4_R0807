@@ -35,7 +35,7 @@ const Scoreboard = () => {
                         return (
                             <tr>
                                 <td key={index}>{index+1}</td>
-                                <td key={index}>{ele.user}</td>
+                                <td key={index}>{ele.username}</td>
                                 <td key={index}>{ele.score}</td>
                             </tr>
                         )

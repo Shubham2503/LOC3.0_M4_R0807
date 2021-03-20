@@ -38,7 +38,7 @@ const Home = () => {
                     return(
                         <Col>
                             <Card style={{ minWidth: '20rem', maxWidth: '100%', marginBottom: 10 }}>
-                            <Card.Img height={180} width={100} variant="top" src={val.images} />
+                            <Card.Img height={220} width={100} variant="top" src={val.images} />
                             <Card.Body>
                                 <Card.Title>{val.title}</Card.Title>
                                 {(val.tags.length > 0) && (
