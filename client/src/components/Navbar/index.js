@@ -19,6 +19,7 @@ const Navbr = () => {
                         <Nav.Item>
                             <Link className={styles.navLink}to="/exercise" >Exercise</Link>
                         </Nav.Item>
+                        <Nav.Item>
                             <Link className={styles.navLink} to="/createpost">Create Post</Link>
                         </Nav.Item> 
                         {/* <Nav.Item>

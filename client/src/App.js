@@ -18,6 +18,7 @@ const App = () => {
                     </Route>
                     <Route path="/exercise">
                         <Exercise />
+                    </Route>
                     <Route path="/createpost">
                         <Createpost />
                     </Route>
