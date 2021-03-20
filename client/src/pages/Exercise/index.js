@@ -143,13 +143,13 @@ const Exercise = () => {
                         <Col>
                             <Form.Label  >So What do you had for your Meal ?? </Form.Label>
                             <Row>
-                                <Col><Form.Control onChange={ipHandler1} as="textarea" rows={3} /></Col>
+                                <Col><Form.Control onChange={ipHandler1} as="textarea" rows={3} placeholder="eg 10 bananas"/></Col>
                             </Row>
                         </Col>
                         <Col>
                             <Form.Label>Tell Me About Your workout session??</Form.Label>
                             <Row>
-                                <Col><Form.Control onChange={ipHandler2} as="textarea" rows={3} /></Col>
+                                <Col><Form.Control onChange={ipHandler2} as="textarea" rows={3} placeholder="eg 10000 steps"/></Col>
                             </Row>
                         </Col>
                     </Row>
@@ -173,7 +173,10 @@ const Exercise = () => {
                 <Button onClick={submit} variant="success">Submit</Button>{' '}
 
             </Form>
-            <Chart gain={calGained} loss={calLost} />
+            
+            {(score !== 0) && 
+                <Chart gain={calGained} loss={calLost} />
+            }
 
 
         </div>
