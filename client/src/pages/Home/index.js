@@ -35,7 +35,7 @@ const Home = () => {
                     return(
                         <div className={styles.container}>
                             <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
+                            <Card.Img height={180} width={100} variant="top" src={val.images} />
                             <Card.Body>
                                 <Card.Title>{val.title} Likes: {val.likes}</Card.Title>
                                 <Card.Text>{val.description}</Card.Text>
