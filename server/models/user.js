@@ -42,6 +42,9 @@ const UserSchema = new Schema(
                 description: String,
                 time: String
             }
+        ],
+        friends: [
+            { type: Schema.Types.ObjectId, ref: "User"},
         ]
     },
     {
