@@ -3,6 +3,7 @@ const router = new express.Router();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const auth = require("../middleware/auth");
+const axios = require("axios");
 
 router.get("/score", async (req, res) => {
     const data = await User.find({});
@@ -31,9 +32,6 @@ router.post("/user/login", async (req, res) => {
             req.body.password
         );
         const token = await user.generateAuthToken();
-        //:user.getPublicProfile()
-        // let h = new Headers();
-        res.append("Authentication", `Bearer ${token}`);
         res.send({ user, token });
     } catch (e) {
         res.status(400).send(e);
