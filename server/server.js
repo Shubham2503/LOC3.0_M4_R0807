@@ -6,12 +6,14 @@ require("dotenv").config();
 const User = require("./models/user");
 const postRouter = require("./routers/posts");
 const goalsRouter = require("./routers/goals");
+const userRouter = require("./routers/userRoutes");
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
 //connect to mongoDB
 const uri = process.env.ATLAS_URI;
 mongoose.connect(
@@ -28,6 +30,8 @@ mongoose.connect(
 app.use(leaderboard);
 app.use(postRouter);
 app.use(goalsRouter);
+app.use(userRouter);
+
 app.listen(port, () => {
     console.log(`server is running on ${port}`);
 });
