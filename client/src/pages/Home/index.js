@@ -20,7 +20,14 @@ const Home = () => {
     }
 
     console.log(data)
-
+    const handleClick = async (id) => {
+        await axios.post('/post/increaselike/'+ id)
+        .then(res => {
+            getData()
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
     return (
         <>
@@ -30,9 +37,9 @@ const Home = () => {
                             <Card style={{ width: '18rem' }}>
                             <Card.Img variant="top" src="holder.js/100px180" />
                             <Card.Body>
-                                <Card.Title>{val.title}</Card.Title>
+                                <Card.Title>{val.title} Likes: {val.likes}</Card.Title>
                                 <Card.Text>{val.description}</Card.Text>
-                                <Button variant="primary">VIEW</Button>
+                                <Button variant="primary" onClick={(e) => handleClick(val._id)}>Like</Button>
                             </Card.Body>
                             </Card>
                         </div>
