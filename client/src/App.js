@@ -3,6 +3,7 @@ import styles from './App.module.css'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Home from './pages/Home'
 import Scoreboard from './pages/Scoreboard'
+import Createpost from './pages/Createpost'
 import Navbar from './components/Navbar'
 
 const App = () => {
@@ -13,6 +14,9 @@ const App = () => {
                 <Switch>
                     <Route path="/scoreboard">
                         <Scoreboard />
+                    </Route>
+                    <Route path="/createpost">
+                        <Createpost />
                     </Route>
                     {/* <Route path="/user/:uid" component={User}/> */}
                     <Route path="/">

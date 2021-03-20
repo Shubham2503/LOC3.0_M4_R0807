@@ -51,6 +51,7 @@ const UserSchema = new Schema(
             },
         ],
 
+
         score: {
             type: Number,
             default: 0,
