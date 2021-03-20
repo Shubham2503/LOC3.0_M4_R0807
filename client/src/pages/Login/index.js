@@ -21,7 +21,7 @@ const Login = (props) => {
     }
 
     const is_loaded = (val) => {
-        props.sendStatusTOParent(val)
+        props.is_loaded(val)
     }
     const submit = async  () => {
 

@@ -27,14 +27,14 @@ const App = () => {
                 <Navbar1 />
                 <Switch>
                     <Route path="login">
-                        <Login sendStatusTOParent={is_loaded}/>
+                    <Login is_loaded = {is_loaded} />
                     </Route>
                     <Route path="/register">
                         <Register />
                     </Route>
                     
                     <Route path="/">
-                        <Login />
+                        <Login is_loaded = {is_loaded} />
                     </Route>
                 </Switch>
             </Router>
