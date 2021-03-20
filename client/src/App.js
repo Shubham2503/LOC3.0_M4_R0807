@@ -17,7 +17,9 @@ import Navbar1 from './components/Navbar1'
 const App = () => {
 
     const [isLogedin, setIsLogedin] = useState(true)
-    
+    const is_loaded = (data) => {
+        setIsLogedin(data)
+    }
     if(!isLogedin)
         return (
             <div className={styles.container}>
@@ -25,7 +27,7 @@ const App = () => {
                 <Navbar1 />
                 <Switch>
                     <Route path="login">
-                        <Login/>
+                        <Login sendStatusTOParent={is_loaded}/>
                     </Route>
                     <Route path="/register">
                         <Register />
