@@ -7,9 +7,12 @@ const User = require("./models/user");
 const postRouter = require("./routers/posts");
 const goalsRouter = require("./routers/goals");
 const userRouter = require("./routers/userRoutes");
+const session = require('express-session');
+
 
 const app = express();
 const port = process.env.PORT || 5000;
+app.use(session({ secret: 'notagoodsecret', resave: false,  saveUninitialized: true }))
 
 app.use(cors());
 app.use(express.json());
