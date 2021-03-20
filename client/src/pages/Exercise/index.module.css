@@ -6,3 +6,18 @@
     align-items: center;
     margin: auto;
 }
+
+.row {
+    min-width: 500px;
+}
+
+.search {
+    border-radius: '3px';
+    box-shadow: '0 2px 12px rgba(0, 0, 0, 0.1)';
+    background-color: 'rgba(255, 255, 255, 0.9)';
+    padding: '2px 0';
+    font-size: '90%';
+    position: 'fixed';
+    overflow: 'auto';
+    max-height: '50%';
+  }

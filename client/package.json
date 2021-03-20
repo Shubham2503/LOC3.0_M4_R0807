@@ -9,10 +9,12 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "react": "^17.0.1",
+    "react-autocomplete": "^1.8.1",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-search-autocomplete": "^5.0.3",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
