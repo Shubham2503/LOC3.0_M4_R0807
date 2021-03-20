@@ -25,6 +25,7 @@ router.get("/user", async (req, res) => {
 
 //endpoint for login
 router.post("/user/login", async (req, res) => {
+    console.log(req.body)
     try {
         const user = await User.findByCredentials(
             req.body.email,
@@ -33,6 +34,7 @@ router.post("/user/login", async (req, res) => {
         const token = await user.generateAuthToken();
         //:user.getPublicProfile()
         // let h = new Headers();
+        console.log(token)
         res.append("Authentication", `Bearer ${token}`);
         res.send({ user, token });
     } catch (e) {
