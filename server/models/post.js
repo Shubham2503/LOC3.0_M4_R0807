@@ -8,16 +8,14 @@ const PostSchema = new Schema({
         type: String, 
         trim: true
     },
-    description: {
-        type: String,
-    },
+    description: String, 
     likes: Number,
     isNSFW: Boolean,
     images: [String],
     user: {type: Schema.Types.ObjectId, ref: 'User'},
     tags: [
         {
-            tag: String
+            tag: String,
         }
     ]
 });

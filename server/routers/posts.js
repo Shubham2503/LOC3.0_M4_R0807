@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const Post = require("../models/posts");
+const Post = require("../models/post");
 
 // endpoint to create the post
 router.post("/post/create", async (req, res) => {

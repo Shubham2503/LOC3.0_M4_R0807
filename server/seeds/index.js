@@ -30,9 +30,22 @@ function makeid(length) {
     }
     return result;
 }
+
+const chooseRandom = (num = 1) => {
+    arr= ['fitness', 'gym', 'workout', 'training', 'health', 'healthy', 'mindful'];
+    const res = [];
+    for(let i = 0; i < num; ){
+       const random = Math.floor(Math.random() * arr.length);
+       if(res.indexOf(arr[random]) !== -1){
+          continue;
+       };
+       res.push(arr[random]);
+       i++;
+    };
+    return res;
+ };
  
 lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus vulputate nisl, sed posuere ex sodales posuere. Praesent sodales ante mattis massa viverra, ac accumsan massa hendrerit. Maecenas tortor risus, commodo eget lacus ac, posuere molestie nunc. Duis fermentum erat purus, et iaculis urna posuere vitae. Sed tincidunt enim a blandit laoreet. '
-
 const seedDB = async () => {
     await User.deleteMany({});
     await Post.deleteMany({});
@@ -44,13 +57,16 @@ const seedDB = async () => {
             score: Math.floor((Math.random() * 100) + 1)
         })
 
+        
+        tags = chooseRandom(2).map((el) => {return {tag: el}})
         const post = new Post({
             title: makeid(10), 
-            descrpiton: "fafdasdf",
+            description: lorem,
             likes: Math.floor((Math.random() * 100) + 0),
             isNSFW: Math.random() < 0.1,
             user: user,
-            images: 'https://unsplash.com/collections/4403382/fitness'
+            images: 'https://unsplash.com/collections/4403382/fitness',
+            tags: tags
         })
 
         // console.log(user, post);
