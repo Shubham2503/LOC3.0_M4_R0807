@@ -6,11 +6,17 @@ import { Link } from "react-router-dom"
 
 const Home = () => {
     const [data, setData] = useState(null)
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(10)
 
     useEffect(() => {
         getData()
-    },[])
+    },[count])
+
+    const updateCount = () => {
+        const new_count = count + 1
+        setCount(new_count)
+        console.log(count)
+    }
 
     const getData = async () => {
         await axios.get('/post/getAllPost')
@@ -19,7 +25,6 @@ const Home = () => {
         }).catch(err => {
             console.log(err)
         })
-        setCount(count+1)
     }
 
     console.log(data)
@@ -47,16 +52,19 @@ const Home = () => {
                                 {(val.tags.length > 0) && (
                                     <>
                                         <Badge pill variant="primary">
-                                            <Link className={styles.navLink} to={"/post/" + val.tags[0].tag}>{val.tags[0].tag}</Link>
+                                            <Link className={styles.navLink} to={"/post/" + val.tags[0].tag} onClick={updateCount}>{val.tags[0].tag}</Link>
                                         </Badge>{' '}
                                         <Badge pill variant="success">
-                                            <Link className={styles.navLink} to={"/post/" + val.tags[1].tag}>{val.tags[1].tag}</Link>
+                                            <Link className={styles.navLink} to={"/post/" + val.tags[1].tag} onClick={updateCount}>{val.tags[1].tag}</Link>
                                         </Badge>
                                         <br/>
                                     </>
                                 )}
                                 <Card.Text>{val.description}</Card.Text>
-                                <Button variant="primary" onClick={(e) => handleClick(val._id)}>{val.likes} Likes</Button>
+                                <Button variant="primary" onClick={(e) => {
+                                    handleClick(val._id)
+                                    updateCount()
+                                }}>{val.likes} Likes</Button>
                                 
                             </Card.Body>
                             </Card>

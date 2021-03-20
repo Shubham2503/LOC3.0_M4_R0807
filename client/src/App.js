@@ -8,6 +8,8 @@ import Createpost from './pages/Createpost'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Post_tag from './pages/Post_tag'
+import Goal from './pages/Goal'
+import Notification from './components/Notification'
 import Navbar from './components/Navbar'
 import Navbar1 from './components/Navbar1'
 
@@ -40,6 +42,7 @@ const App = () => {
     return (
 
         <div className={styles.container}>
+            <Notification visible={false}/>
             <Router>
                 <Navbar />
                 <Switch>
@@ -51,6 +54,9 @@ const App = () => {
                     </Route>
                     <Route path="/createpost">
                         <Createpost />
+                    </Route>
+                    <Route path="/goal">
+                        <Goal />
                     </Route>
                     <Route path="/post/:postid" component={Post_tag}/>
                     <Route path="/">

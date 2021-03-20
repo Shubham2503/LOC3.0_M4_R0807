@@ -61,15 +61,6 @@ const Createpost = () => {
                     <Form.Control  placeholder="Image URL" onChange={e => setUrl(e.target.value)}/>
                 </Form.Group>
 
-                <Form.Group>
-                    <Form.File
-                    className="position-relative"
-                    name="file"
-                    label="File"
-                    onChange={(e) => setSelectedFile(e.target.files[0])}
-                    />
-                </Form.Group>
-
                 <Button variant="primary" type="submit" onClick={handleClick}>
                     Submit
                 </Button>
