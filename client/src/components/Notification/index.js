@@ -1,5 +1,4 @@
 import React from 'react'
-import { Notifications } from 'react-push-notification';
 import addNotification from 'react-push-notification';
 
 const Notification = (props) => {
@@ -19,7 +18,7 @@ const Notification = (props) => {
 
     return (
         <div>
-          {popNotification()}
+            {popNotification()}
         </div>
     )
 }

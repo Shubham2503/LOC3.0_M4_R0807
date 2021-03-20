@@ -2,20 +2,28 @@ import React, { useState, useEffect } from 'react'
 import styles from './index.module.css'
 import { Form, Button, Col, Modal, Table } from 'react-bootstrap'
 import axios from 'axios'
-
+import Notification from '../../components/Notification'
 
 const Goal = () => {
     const [title, setTitle] = useState('')
     const [desc, setDesc] = useState('')
     const [time, setTime] = useState('')
     const [data, setData] = useState(null)
-
+    const [showNotification, setShowNotification] = useState(false)
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const handleNotification = () => {
+        setShowNotification(true)
+        setTimeout(() => setShowNotification(false), 
+            1
+        );
+    }
+
     const handleClick = async () => {
+        handleNotification()
         await axios.post('/goals/6055fd6eb17d53243c8015c1', {
             title,
             description: desc,
@@ -46,6 +54,7 @@ const Goal = () => {
 
     return (
         <div className={styles.container}>
+            <Notification title={'Added Goal'} msg={'Good to see that new goals are added'} visible={showNotification}/>
             <h2>Your Goals</h2>
             <Button variant="primary" onClick={handleShow}>
                 Add Goal
@@ -59,7 +68,7 @@ const Goal = () => {
                         <Form.Row>
                             <Form.Group as={Col}>
                                 <Form.Label>Title</Form.Label>
-                                <Form.Control type="text" name="title" placeholder="Enter email" onChange={e => setTitle(e.target.value)} />
+                                <Form.Control type="text" name="title" placeholder="Enter title" onChange={e => setTitle(e.target.value)} />
                             </Form.Group>
                         </Form.Row>
 
