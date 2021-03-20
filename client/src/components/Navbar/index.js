@@ -19,6 +19,11 @@ const Navbr = () => {
                         <Nav.Item>
                             <Link className={styles.navLink}to="/exercise" >Exercise</Link>
                         </Nav.Item>
+                            <Link className={styles.navLink} to="/createpost">Create Post</Link>
+                        </Nav.Item> 
+                        {/* <Nav.Item>
+                            <Link className={styles.navLink}to="/alltransaction" >Transaction</Link>
+                        </Nav.Item> */}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

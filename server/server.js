@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const leaderboard = require("./routers/leaderboard");
 require("dotenv").config();
 const User = require("./models/user");
+const postRouter = require("./routers/posts");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -24,7 +25,7 @@ mongoose.connect(
 //middleware
 // app.use('/user', userRoute)
 app.use(leaderboard);
-
+app.use(postRouter);
 app.listen(port, () => {
     console.log(`server is running on ${port}`);
 });

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Home from './pages/Home'
 import Scoreboard from './pages/Scoreboard'
 import Exercise from './pages/Exercise'
+import Createpost from './pages/Createpost'
 import Navbar from './components/Navbar'
 
 const App = () => {
@@ -17,6 +18,8 @@ const App = () => {
                     </Route>
                     <Route path="/exercise">
                         <Exercise />
+                    <Route path="/createpost">
+                        <Createpost />
                     </Route>
                     {/* <Route path="/user/:uid" component={User}/> */}
                     <Route path="/">
