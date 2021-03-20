@@ -11,8 +11,12 @@ const Createpost = () => {
     const [selectedFile, setSelectedFile] = useState(null);
 
     const handleClick = async () => {
-        
-        await axios.get('/post/create')
+
+        await axios.post('/post/create', {
+            title,
+            description: desc,
+            images: url
+        })
         .then(res => {
             
         }).catch(err => {
@@ -26,7 +30,7 @@ const Createpost = () => {
                 <Form.Row>
                     <Form.Group as={Col}>
                         <Form.Label>Title</Form.Label>
-                        <Form.Control type="email" name="title" placeholder="Enter email" onChange={e => setTitle(e.target.value)}/>
+                        <Form.Control type="text" name="title" placeholder="Enter email" onChange={e => setTitle(e.target.value)}/>
                     </Form.Group>
                 </Form.Row>
 
