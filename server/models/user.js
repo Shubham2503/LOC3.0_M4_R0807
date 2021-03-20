@@ -46,11 +46,9 @@ const UserSchema = new Schema(
             {
                 token: {
                     type: String,
-                    require: true,
                 },
             },
         ],
-
 
         score: {
             type: Number,

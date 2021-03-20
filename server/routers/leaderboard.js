@@ -10,6 +10,17 @@ router.get("/score", async (req, res) => {
     res.send(data);
 });
 
+router.get("/user", async (req, res) => {
+    const newUser = new User(req.body);
+    console.log("fasdf");
+    try {
+        await newUser.save();
+        res.status(201).send(newUser);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+});
+
 router.post("/score/update/:id", async (req, res) => {
     const _id = req.params.id;
     try {
@@ -24,4 +35,5 @@ router.post("/score/update/:id", async (req, res) => {
     }
 });
 
+//
 module.exports = router;
