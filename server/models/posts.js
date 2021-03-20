@@ -17,7 +17,8 @@ const PostSchema = new Schema({
         image: {
             type: Buffer
         }
-    }]
+    }],
+    user: {type: Schema.Types.ObjectId, ref='user'}
 });
 
 module.exports = mongoose.model('Post', PostSchema);
