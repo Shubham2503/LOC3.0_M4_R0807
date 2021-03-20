@@ -3,13 +3,13 @@ import styles from './App.module.css'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Home from './pages/Home'
 import Scoreboard from './pages/Scoreboard'
-// import Navbar from './components/Navbar'
+import Navbar from './components/Navbar'
 
 const App = () => {
     return (
         <div className={styles.container}>
             <Router>
-                {/* <Navbar /> */}
+                <Navbar />
                 <Switch>
                     <Route path="/scoreboard">
                         <Scoreboard />
