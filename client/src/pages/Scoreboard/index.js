@@ -12,12 +12,12 @@ const Scoreboard = () => {
 
 
     const getTransaction = async () => {
-        // await axios.get('/transaction')
-        //     .then(res => {
-        //         setTransactions(res.data.data)
-        //     }).catch(err => {
-        //         console.log(err)
-        //     })
+        await axios.get('/score')
+            .then(res => {
+                setTransactions(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
     return (
