@@ -2,38 +2,40 @@ const express = require("express");
 const router = new express.Router();
 const Post = require("../models/post");
 const multer = require("multer");
-const got = require('got');
-
+const got = require("got");
 
 // endpoint to create the post
 const isNSFW = (req, res, next) => {
-    const apiKey = 'acc_e83c4d07edfd9ac';
-    const apiSecret = '9a4d7d6918606e0cbfc789a6fd9f677a';
+    const apiKey = "acc_e83c4d07edfd9ac";
+    const apiSecret = "9a4d7d6918606e0cbfc789a6fd9f677a";
 
     const imageUrl = req.body.images;
-    const url = 'https://api.imagga.com/v2/categories/nsfw_beta?image_url=' + encodeURIComponent(imageUrl);
+    const url =
+        "https://api.imagga.com/v2/categories/nsfw_beta?image_url=" +
+        encodeURIComponent(imageUrl);
 
     (async () => {
         try {
-            const response = await got(url, {username: apiKey, password: apiSecret});
+            const response = await got(url, {
+                username: apiKey,
+                password: apiSecret,
+            });
             const t = await JSON.parse(response.body);
 
-            const sfw = t.result.categories.find(el => el.name.en === 'safe');
+            const sfw = t.result.categories.find((el) => el.name.en === "safe");
 
-            if(sfw && sfw.confidence > 90){
+            if (sfw && sfw.confidence > 90) {
                 next();
-            }
-            else {
+            } else {
                 res.status(400).send("nsfw safe val less than 90");
             }
         } catch (error) {
             res.status(400).send(error);
         }
     })();
-}
+};
 
 router.post("/post/create", isNSFW, async (req, res) => {
-console.log('hihihhiih');
     const newPost = new Post(req.body);
     try {
         await newPost.save();
@@ -109,7 +111,7 @@ router.post("/post/increaselike/:id", async (req, res) => {
     const _id = req.params.id;
     try {
         const flag = await Post.updateOne({ _id: _id }, { $inc: { likes: 1 } });
-        res.send("done");
+        res.status(200).send("done");
     } catch (e) {
         res.status(400).send(e);
     }
