@@ -1,0 +1,35 @@
+.navBrand {
+    text-decoration: none;
+    font-family: serif;
+    font-size: 40px;
+}
+
+.navLink {
+    text-decoration: none;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.navLink:hover {
+    text-decoration: none;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+/* Media screen size */
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+    }
+    .head1 {
+        font-size: 1.75rem;
+    }
+    .rNavbar {
+        width: 50vw;
+        box-shadow: 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+    }
+}
