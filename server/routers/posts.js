@@ -3,6 +3,7 @@ const router = new express.Router();
 const Post = require("../models/post");
 const multer = require("multer");
 const got = require("got");
+const auth = require("../middleware/auth");
 
 // endpoint to create the post
 const isNSFW = (req, res, next) => {
@@ -35,7 +36,7 @@ const isNSFW = (req, res, next) => {
     })();
 };
 
-router.post("/post/create", isNSFW, async (req, res) => {
+router.post("/post/create", auth, isNSFW, async (req, res) => {
     const newPost = new Post(req.body);
     try {
         await newPost.save();
@@ -70,7 +71,7 @@ router.get("/post/getAllPost", async (req, res) => {
 });
 
 // endpoint to get all post of a user
-router.get("/post/getPost/:id", async (req, res) => {
+router.get("/post/getPost/:id", auth, async (req, res) => {
     const _id = req.params.id;
     try {
         const particularPosts = await Post.findById(_id);
@@ -85,7 +86,7 @@ router.get("/post/getPost/:id", async (req, res) => {
 
 //update the posts
 //only when the person is logged in
-router.patch("/post/me", async (req, res) => {
+router.patch("/post/me", auth, async (req, res) => {
     const updates = Object.keys(req.body);
     const allowedUpdates = ["title", "description", "isNSFW"];
     const isValid = updates.every((updates) => {
@@ -118,7 +119,7 @@ router.post("/post/increaselike/:id", async (req, res) => {
 });
 
 // endpoint to post the on the basis of the tags
-router.get("/post/searchByTag/:tag", async (req, res) => {
+router.get("/post/searchByTag/:tag", auth, async (req, res) => {
     const tag = req.params.tag;
     try {
         const posts = await Post.find({ "tags.tag": tag });
