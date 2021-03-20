@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Post_tag from './pages/Post_tag'
 import Goal from './pages/Goal'
+import User from './pages/User'
 import Notification from './components/Notification'
 import Navbar from './components/Navbar'
 import Navbar1 from './components/Navbar1'
@@ -57,6 +58,9 @@ const App = () => {
                     </Route>
                     <Route path="/goal">
                         <Goal />
+                    </Route>
+                    <Route path="/user">
+                        <User />
                     </Route>
                     <Route path="/post/:postid" component={Post_tag}/>
                     <Route path="/">

@@ -18,7 +18,7 @@ const Goal = () => {
     const handleNotification = () => {
         setShowNotification(true)
         setTimeout(() => setShowNotification(false), 
-            1
+            10
         );
     }
 

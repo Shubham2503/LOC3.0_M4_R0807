@@ -25,6 +25,9 @@ const Navbr = () => {
                         <Nav.Item>
                             <Link className={styles.navLink} to="/createpost">Create Post</Link>
                         </Nav.Item> 
+                        <Nav.Item>
+                            <Link className={styles.navLink} to="/user">User</Link>
+                        </Nav.Item> 
                         {/* <Nav.Item>
                             <Link className={styles.navLink}to="/alltransaction" >Transaction</Link>
                         </Nav.Item> */}
