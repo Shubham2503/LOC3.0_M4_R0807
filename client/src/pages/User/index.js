@@ -73,7 +73,7 @@ const User = () => {
                             return (
                                 <tr key={index}>
                                     <td>{index+1}</td>
-                                    <td>{ele.name}</td>
+                                    <td>{ele.username}</td>
                                 </tr>
                             )
                         })}

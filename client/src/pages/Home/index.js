@@ -36,11 +36,24 @@ const Home = () => {
             console.log(err)
         })
     }
+
+    const handleFriendClick = async () => {
+        await axios.get('/post/getFriendsPost/6055fd6eb17d53243c8015c1')
+        .then(res => {
+            setData(res.data)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
     if(data === null)
     return null
     return (
         <>
         <Container md={3} className={styles.container}>
+            <Button variant="primary" className={styles.button} onClick={handleFriendClick}>
+                View Friend's posts
+            </Button>
             <Row>
             {data.map((val, ind) => {
                     return(

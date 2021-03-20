@@ -1,4 +1,8 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: auto;
 }
 
@@ -7,4 +11,8 @@
     margin: 0 10px;
     text-decoration: none;
     color: azure;
+}
+
+.button {
+    margin-bottom: 30px;
 }
