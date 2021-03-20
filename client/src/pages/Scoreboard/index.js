@@ -4,17 +4,17 @@ import axios from 'axios'
 import Table from 'react-bootstrap/Table'
 
 const Scoreboard = () => {
-    const [transactions, setTransactions] = useState([])
+    const [score, setScore] = useState([])
 
     useEffect(() => {
         getTransaction()
     }, [])
-
+    console.log(score)
 
     const getTransaction = async () => {
         await axios.get('/score')
             .then(res => {
-                setTransactions(res.data)
+                setScore(res.data)
             }).catch(err => {
                 console.log(err)
             })
@@ -31,12 +31,12 @@ const Scoreboard = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {transactions.map((ele, index) => {
+                    {score.map((ele, index) => {
                         return (
-                            <tr>
-                                <td key={index}>{index+1}</td>
-                                <td key={index}>{ele.username}</td>
-                                <td key={index}>{ele.score}</td>
+                            <tr key={index}>
+                                <td>{index+1}</td>
+                                <td>{ele.username}</td>
+                                <td>{ele.score}</td>
                             </tr>
                         )
                     })}
