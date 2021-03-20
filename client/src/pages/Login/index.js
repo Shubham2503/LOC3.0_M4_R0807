@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styles from './index.module.css'
 import axios from 'axios'
-
+import Cookies from "js-cookie"
 
 
 
@@ -33,7 +33,9 @@ const Login = (props) => {
         .then(res => {
             const temp_data = res.data;
             console.log(temp_data)
-            if(temp_data === 'success') {
+            if(temp_data) {
+                Cookies.set("id",temp_data)
+
                 is_loaded(true)
                 setError(false)
                 console.log(error)

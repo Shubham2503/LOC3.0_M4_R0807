@@ -30,7 +30,7 @@ router.post("/user/login", async (req, res) => {
     if(user && user.password === req.body.password)
     {
         req.session.id = user._id;
-        res.send("success")
+        res.send(user._id)
     }
     else{
         res.status(401).send('kaabe lode')
