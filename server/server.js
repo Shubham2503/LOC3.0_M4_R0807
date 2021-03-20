@@ -10,9 +10,6 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-User.insertMany({ username: "harsh", score: 34 });
-User.insertMany({ username: "fasdf", score: 56 });
-User.insertMany({ username: "hfdsa", score: 45 });
 //connect to mongoDB
 const uri = process.env.ATLAS_URI;
 mongoose.connect(
