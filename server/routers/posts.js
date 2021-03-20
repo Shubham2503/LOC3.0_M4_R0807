@@ -37,7 +37,7 @@ const isNSFW = (req, res, next) => {
 };
 
 router.post("/post/create", auth, isNSFW, async (req, res) => {
-    const newPost = new Post(req.body);
+    const newPost = new Post({ ...req.body, user: req.user._id });
     try {
         await newPost.save();
         res.status(201).send(newPost);
