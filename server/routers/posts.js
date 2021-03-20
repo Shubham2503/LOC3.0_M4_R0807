@@ -5,7 +5,6 @@ const Post = require("../models/post");
 // endpoint to create the post
 router.post("/post/create", async (req, res) => {
     const newPost = new Post(req.body);
-    console.log("fa");
     try {
         await newPost.save();
         res.status(201).send(newPost);
@@ -73,4 +72,16 @@ router.post("/post/increaselike/:id", async (req, res) => {
         res.status(400).send(e);
     }
 });
+
+// endpoint to post the on the basis of the tags
+router.get("/post/searchByTag/:tag", async (req, res) => {
+    const tag = req.params.tag;
+    try {
+        const posts = await Post.find({ "tags.tag": tag });
+        res.status(200).send(posts);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+});
+
 module.exports = router;
