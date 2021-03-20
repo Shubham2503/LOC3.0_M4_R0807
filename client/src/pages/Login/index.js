@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styles from './index.module.css'
+import axios from 'axios'
 
 
 
@@ -7,28 +8,59 @@ import styles from './index.module.css'
 
 
 const Login = () => {
+    const [success,setSuccess] = useState("")
+    const [email,setEmail] = useState("")
+    const [pass,setPass] = useState("")
+    const inp1 = (e) =>{
+        setEmail(e.target.value)
+    }
+    const inp2 = (e) =>{
+        setPass(e.target.value)
+    }
+
+    const submit = async  () => {
+
+      
+        await axios.post(`/user/login`, {
+            "email": email,
+            "password" : pass
+        })
+            .then(res => {
+                const temp_data = res.data;
+                if(temp_data.email)
+                {
+                    
+                }
+
+            }).catch(err => {
+                console.log(err)
+            })
+
+    }
+
     return(
         <div className = {styles.box}>
            
-           <form method = "POST" action = "/user/login">
+           
                 <h3>Log in</h3>
-               
+              
                 <div className="form-group">
                     <label>Email</label>
-                    <input name = "email" type="email" className="form-control" placeholder="Enter email" />
+                    <input onChange = {inp1} value = {email} name = "email" type="email" className="form-control" placeholder="Enter email" />
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input name ="password" type="password" className="form-control" placeholder="Enter password" />
+                    <input onChange = {inp2} value = {pass} name ="password" type="password" className="form-control" placeholder="Enter password" />
                 </div>
          
 
                
 
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Sign in</button>
+                <button onClick = {submit}  className="btn btn-dark btn-lg btn-block">Sign in</button>
                 
-            </form>
+                
+           
       
         </div>
           );
