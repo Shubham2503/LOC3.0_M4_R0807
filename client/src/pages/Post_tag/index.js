@@ -12,10 +12,18 @@ const Post_tag = (props) => {
 
     const setPostId = async () => {
         setPostid(props.match.params.postid)
+        getData()
     }
+    
+    useEffect(() => {
+        setPostId()
+    }, [count, postid])
+
 
     const updateCount = () => {
-        setCount(count+1)
+        const new_count = count + 1
+        setCount(new_count)
+        console.log(count)
     }
 
     const getData = async () => {
@@ -31,18 +39,13 @@ const Post_tag = (props) => {
     const handleClick = async (id) => {
         await axios.post('/post/increaselike/'+ id)
         .then(res => {
-            getData()
+
         }).catch(err => {
             console.log(err)
         })
         setCount(count+1)
     }
     
-    useEffect(() => {
-        setPostId()
-        getData()
-    }, [count])
-
     console.log(postid)
 
     if (postid === null || data === null)
@@ -70,7 +73,10 @@ const Post_tag = (props) => {
                                     </>
                                 )}
                                 <Card.Text>{val.description}</Card.Text>
-                                <Button variant="primary" onClick={(e) => handleClick(val._id)}>{val.likes} Likes</Button>
+                                <Button variant="primary" onClick={(e) => {
+                                    handleClick(val._id)
+                                    updateCount()
+                                }}>{val.likes} Likes</Button>
                                 
                             </Card.Body>
                             </Card>
