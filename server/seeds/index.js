@@ -1,7 +1,11 @@
-const mongoose = require('mongoose');
-const User = require('../models/user');
+const cors = require("cors");
+const mongoose = require("mongoose");
+require("dotenv").config();
+const User = require("../models/user");
+
 
 const uri = process.env.ATLAS_URI;
+console.log(uri);
 mongoose.connect(
     uri,
     { useUnifiedTopology: true, useNewUrlParser: true },
@@ -28,7 +32,7 @@ const seedDB = async () => {
     {
         const user = new User({
             username: makeid(5),
-            score: Math.floor((Math.random() * 100) + 1);
+            score: Math.floor((Math.random() * 100) + 1)
         })
         await user.save();
     }
