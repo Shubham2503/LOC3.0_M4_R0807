@@ -7,6 +7,7 @@ import Exercise from './pages/Exercise'
 import Createpost from './pages/Createpost'
 import Login from './pages/Login'
 import Post_tag from './pages/Post_tag'
+import Notification from './components/Notification'
 import Navbar from './components/Navbar'
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
     return (
 
         <div className={styles.container}>
+            <Notification visible={false}/>
             <Router>
                 <Navbar />
                 <Switch>
