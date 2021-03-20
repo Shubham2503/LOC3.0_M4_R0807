@@ -11,7 +11,7 @@ const Scoreboard = () => {
     }, [])
     console.log(score)
 
-    const getTransaction = async () => {
+    const getTransaction = async (val) => {
         await axios.get('/score')
             .then(res => {
                 setScore(res.data)
@@ -28,6 +28,8 @@ const Scoreboard = () => {
                         <th>#</th>
                         <th>UserName</th>
                         <th>Score</th>
+                        <th>Calories Burnt</th>
+                        <th>Steps</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +39,8 @@ const Scoreboard = () => {
                                 <td>{index+1}</td>
                                 <td>{ele.username}</td>
                                 <td>{ele.score}</td>
+                                <td>{ele.calories}</td>
+                                <td>{ele.steps}</td>
                             </tr>
                         )
                     })}
