@@ -35,6 +35,7 @@ const Post_tag = (props) => {
         }).catch(err => {
             console.log(err)
         })
+        setCount(count+1)
     }
     
     useEffect(() => {

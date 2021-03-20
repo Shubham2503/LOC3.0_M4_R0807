@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 
 const Home = () => {
     const [data, setData] = useState(null)
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         getData()
@@ -18,6 +19,7 @@ const Home = () => {
         }).catch(err => {
             console.log(err)
         })
+        setCount(count+1)
     }
 
     console.log(data)
