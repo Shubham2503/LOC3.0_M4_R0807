@@ -2,8 +2,7 @@
   .box{
     border-radius: 14px;
    width: 800px;
-   margin-left: 27%;
-    margin-top: 57px;
+  margin: 0 auto;
     border: 3px solid black;
     padding: 50px;
 
