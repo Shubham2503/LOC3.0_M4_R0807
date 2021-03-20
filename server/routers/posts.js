@@ -4,6 +4,7 @@ const Post = require("../models/post");
 const multer = require("multer");
 const got = require('got');
 
+
 // endpoint to create the post
 const isNSFW = (req, res, next) => {
     const apiKey = 'acc_e83c4d07edfd9ac';
