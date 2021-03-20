@@ -16,6 +16,10 @@ const Register = () => {
                 </Form.Row>
                 <Form.Row>
                     <Form.Group as={Col}>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control type="email" name="email" placeholder="Email" />
+                    </Form.Group>
+                    <Form.Group as={Col}>
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" name="pass" placeholder="Password" />
                     </Form.Group>
