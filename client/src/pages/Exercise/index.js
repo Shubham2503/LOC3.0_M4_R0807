@@ -42,8 +42,11 @@ const Exercise = () => {
         <div className={styles.container}>
             <h2>Current Score : </h2>
             <Form>
-                <Row className={styles.row}>
-                    <Col>
+                <Form.Group as={Row} controlId="formHorizontalEmail">
+                    {/* <Form.Label column sm={2}>
+                    Food
+                    </Form.Label>
+                    <Col sm={10}>
                     <Autocomplete
                         className={styles.search}
                         getItemValue={(item) => item.label}
@@ -56,9 +59,16 @@ const Exercise = () => {
                         value={search}
                         onChange={handleUpdate}
                         onSelect={(val) => setSearch(val)}
-                        />
+                    />
+                    </Col> */}
+                    
+                    <Form.Label column sm={2}>
+                        Exercise
+                    </Form.Label>
+                    <Col sm="10">
+                        <Form.Control type="textarea" placeholder="1000 steps" />
                     </Col>
-                </Row>
+                </Form.Group>
             </Form>
         </div>
     )
