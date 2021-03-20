@@ -7,6 +7,7 @@ import Exercise from './pages/Exercise'
 import Createpost from './pages/Createpost'
 import Login from './pages/Login'
 import Post_tag from './pages/Post_tag'
+import Goal from './pages/Goal'
 import Notification from './components/Notification'
 import Navbar from './components/Navbar'
 
@@ -34,6 +35,9 @@ const App = () => {
                     </Route>
                     <Route path="/createpost">
                         <Createpost />
+                    </Route>
+                    <Route path="/goal">
+                        <Goal />
                     </Route>
                     <Route path="/post/:postid" component={Post_tag}/>
                     <Route path="/">
