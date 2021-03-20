@@ -4,6 +4,11 @@ require("dotenv").config();
 const User = require("../models/user");
 
 
+const app = express();
+const port = process.env.PORT || 5001;
+
+app.use(cors());
+
 const uri = process.env.ATLAS_URI;
 console.log(uri);
 mongoose.connect(
@@ -41,3 +46,8 @@ const seedDB = async () => {
 seedDB().then(() => {
     mongoose.connection.close();
 })
+
+
+app.listen(port, () => {
+    console.log(`server is running on ${port}`);
+});
