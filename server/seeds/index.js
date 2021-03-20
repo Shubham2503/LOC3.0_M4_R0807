@@ -68,7 +68,13 @@ const seedDB = async () => {
     {
         const user = new User({
             username: makeid(5),
-            score: Math.floor((Math.random() * 100) + 1)
+            score: Math.floor((Math.random() * 100) + 1),
+            weight: Math.floor((Math.random() * 150) + 30),
+            height: Math.floor((Math.random() * 200) + 100),
+            age: Math.floor((Math.random() * 60) + 10),
+            gender: (Math.random() < 0.5 ? "male": 'female'),
+            calories: Math.floor((Math.random() * 800) + 100),
+            steps: Math.floor((Math.random() * 30000) + 1000)
         })
 
         
