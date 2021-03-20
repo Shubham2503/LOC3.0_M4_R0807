@@ -25,21 +25,31 @@ router.get("/user", async (req, res) => {
 
 //endpoint for login
 router.post("/user/login", async (req, res) => {
-    console.log(req.body)
-    try {
-        const user = await User.findByCredentials(
-            req.body.email,
-            req.body.password
-        );
-        const token = await user.generateAuthToken();
-        //:user.getPublicProfile()
-        // let h = new Headers();
-        console.log(token)
-        res.append("Authentication", `Bearer ${token}`);
-        res.send({ user, token });
-    } catch (e) {
-        res.status(400).send(e);
+
+    const user = await User.findOne({email: req.body.email})
+    if(user && user.password === req.body.password)
+    {
+        req.session.id = user._id;
+        res.send("success")
     }
+    else{
+        res.status(401).send('kaabe lode')
+    }
+
+    // try {
+    //     const user = await User.findByCredentials(
+    //         req.body.email,
+    //         req.body.password
+    //     );
+    //     const token = await user.generateAuthToken();
+    //     //:user.getPublicProfile()
+    //     // let h = new Headers();
+    //     console.log(token)
+    //     res.append("Authentication", `Bearer ${token}`);
+        // res.send({ user, token });
+    // } catch (e) {
+    //     res.status(400).send(e);
+    // }
 });
 
 router.post("/score/update/:id", auth, async (req, res) => {
