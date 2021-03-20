@@ -18,7 +18,7 @@ const PostSchema = new Schema(
             default: false,
         },
         images: String,
-        user: { type: Schema.Types.ObjectId, ref: "User" },
+        user: { type: Schema.Types.ObjectId, ref: "User", required: true },
         tags: [
             {
                 tag: String,
@@ -28,4 +28,5 @@ const PostSchema = new Schema(
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Post", PostSchema);
+const Post = mongoose.model("Post", PostSchema);
+module.exports = Post;

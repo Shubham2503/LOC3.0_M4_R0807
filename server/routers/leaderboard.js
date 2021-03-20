@@ -1,6 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const User = require("../models/user");
+const bcrypt = require("bcryptjs");
 
 router.get("/score", async (req, res) => {
     const data = await User.find({});
@@ -16,6 +17,21 @@ router.get("/user", async (req, res) => {
     try {
         await newUser.save();
         res.status(201).send(newUser);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+});
+
+//endpoint for login
+router.post("/user/login", async (req, res) => {
+    try {
+        const user = await User.findByCredentials(
+            req.body.email,
+            req.body.password
+        );
+        const token = await user.generateAuthToken();
+        //:user.getPublicProfile()
+        res.send({ user, token });
     } catch (e) {
         res.status(400).send(e);
     }
