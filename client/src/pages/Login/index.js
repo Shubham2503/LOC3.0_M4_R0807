@@ -7,7 +7,7 @@ import axios from 'axios'
 
 
 
-const Login = () => {
+const Login = (props) => {
     const [success,setSuccess] = useState("")
     const [email,setEmail] = useState("")
     const [pass,setPass] = useState("")
@@ -18,6 +18,9 @@ const Login = () => {
         setPass(e.target.value)
     }
 
+    const is_loaded = (val) => {
+        props.sendStatusTOParent(val)
+    }
     const submit = async  () => {
 
       
@@ -31,7 +34,7 @@ const Login = () => {
                 {
                     
                 }
-
+                is_loaded(true)
             }).catch(err => {
                 console.log(err)
             })
