@@ -6,7 +6,9 @@ const User = require('../models/user')
 router.get("/user/:id", async (req, res) => {
     const _id = req.params.id;
     try {
-        const user = await User.findById(_id).populate('friends');
+        const user = await User.findById(_id).populate({
+            path: "friends"
+        });
         res.status(200).send(user);
     } catch (e) {
         res.status(500).send(e);
