@@ -11,7 +11,7 @@ const Login = (props) => {
     const [success,setSuccess] = useState(false)
     const [email,setEmail] = useState("")
     const [pass,setPass] = useState("")
-    const [error,setError] = useState(null)
+    const [error,setError] = useState(false)
 
     const inp1 = (e) =>{
         setEmail(e.target.value)
@@ -30,22 +30,19 @@ const Login = (props) => {
             "email": email,
             "password" : pass
         })
-            .then(res => {
-                const temp_data = res.data;
-                console.log(temp_data)
-               
-                    console.log("redirect ho kaminee")
-                    setSuccess(true)
-                    console.log(success)
-                    is_loaded(true)
-                    setError(false)
-               
-
-            }).catch(err => {
-                setError(true)
-                console.log(err)
-                setSuccess(false)
-            })
+        .then(res => {
+            const temp_data = res.data;
+            console.log(temp_data)
+            if(temp_data === 'success') {
+                is_loaded(true)
+                setError(false)
+                console.log(error)
+            }
+        }).catch(err => {
+            setError(true)
+            console.log(err)
+            setSuccess(false)
+        })
 
     }
 
@@ -67,7 +64,7 @@ const Login = (props) => {
          
 
                
-                {(error) && <h6 style={{color: 'red'}}>* Wrong Email or Password</h6>}
+                {(error === true) && <h6 style={{color: 'red'}}>* Wrong Email or Password</h6>}
                 <button onClick = {submit}  className="btn btn-dark btn-lg btn-block">Sign in</button>
                 
                 
