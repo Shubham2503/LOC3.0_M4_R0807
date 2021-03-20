@@ -2,15 +2,12 @@ import React, { useEffect, useState } from 'react'
 import styles from './index.module.css'
 import { Card, Button, Badge, Col, Row, Container, Form, Table } from 'react-bootstrap'
 import axios from 'axios'
-
 const User = () => {
-
     const [data, setData] = useState(null)
     const [uname, setUname] = useState('')
     useEffect(() => {
         getData()
     }, [])
-
     const getData = async () => {
         await axios.get('/user/6055fd6eb17d53243c8015c1')
             .then(res => {
@@ -19,10 +16,7 @@ const User = () => {
                 console.log(err)
             })
     }
-
-
     console.log(data)
-
     const handleClick = async () => {
         await axios.post(`/friend/6055fd6eb17d53243c8015c1/${uname}`)
         .then(res => {
@@ -31,12 +25,8 @@ const User = () => {
             console.log(err)
         })
     }
-
     if (data === null)
         return null
-
-
-
     return (
         <Container className={styles.container}>
             <Row>

@@ -20,7 +20,6 @@ const App = () => {
     const is_loaded = (data) => {
         setIsLogedin(data)
     }
-
     if(!isLogedin)
         return (
             <div className={styles.container}>

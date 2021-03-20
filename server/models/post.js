@@ -18,7 +18,7 @@ const PostSchema = new Schema(
             default: false,
         },
         images: String,
-        user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+        user: { type: Schema.Types.ObjectId, ref: "User" },
         tags: [
             {
                 tag: String,
