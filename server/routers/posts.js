@@ -34,7 +34,7 @@ router.get("/post/getPost/:id", async (req, res) => {
         if (!particularPosts) {
             return res.status(404).send();
         }
-        res.status(200).send(task);
+        res.status(200).send(particularPosts);
     } catch (e) {
         res.status(400).send();
     }
@@ -44,19 +44,31 @@ router.get("/post/getPost/:id", async (req, res) => {
 //only when the person is logged in
 router.patch("/post/me", async (req, res) => {
     const updates = Object.keys(req.body);
-    const allowedUpdates = ["title", "description"];
+    const allowedUpdates = ["title", "description", "isNSFW"];
     const isValid = updates.every((updates) => {
         return allowedUpdates.includes(updates);
     });
     if (!isValid) {
         return res.status(400).send({ error: "Invalid field" });
     }
+    console.log(req.post);
     try {
         updates.forEach((updates) => {
             req.post[updates] = req.body[updates];
         });
         await req.post.save();
         res.send(req.post);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+});
+
+// likes update endpoint
+router.post("/post/increaselike/:id", async (req, res) => {
+    const _id = req.params.id;
+    try {
+        const flag = await Post.updateOne({ _id: _id }, { $inc: { likes: 1 } });
+        res.send("done");
     } catch (e) {
         res.status(400).send(e);
     }
