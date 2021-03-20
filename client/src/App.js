@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Scoreboard from './pages/Scoreboard'
 import Exercise from './pages/Exercise'
 import Createpost from './pages/Createpost'
+import Post_tag from './pages/Post_tag'
 import Navbar from './components/Navbar'
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
                     <Route path="/createpost">
                         <Createpost />
                     </Route>
-                    {/* <Route path="/user/:uid" component={User}/> */}
+                    <Route path="/post/:postid" component={Post_tag}/>
                     <Route path="/">
                         <Home />
                     </Route>
