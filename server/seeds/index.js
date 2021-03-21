@@ -87,7 +87,7 @@ const seedDB = async () => {
         let user = new User({
             username: usernameArr[i],
             email: makeid(3)+'@'+makeid(3)+'.com',
-            password: makeid(4),
+            password: usernameArr[i],
             score: Math.floor((Math.random() * 100) + 1),
             weight: Math.floor((Math.random() * 150) + 30),
             height: Math.floor((Math.random() * 200) + 100),

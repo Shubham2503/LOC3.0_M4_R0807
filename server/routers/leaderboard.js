@@ -42,8 +42,9 @@ router.get("/user", async (req, res) => {
 //endpoint for login
 router.post("/user/login", async (req, res) => {
 
-    const user = await User.findOne({email: req.body.email})
-    if(user && user.password === req.body.password)
+    const user = await User.findOne({email: req.body.email});
+    const isValid = await bcrypt.compare(password, foundUser.password);
+    if(user && await bcrypt.compare(req.body.password, user.password ))
     {
         req.session.id = user._id;
         res.send(user._id)
