@@ -55,7 +55,7 @@ const App = () => {
         <div className={styles.container}>
             <Notification visible={false}/>
             <Router>
-                <Navbar />
+                <Navbar is_loaded = {is_loaded} />
                 <Switch>
                     <Route path="/scoreboard">
                         <Scoreboard />

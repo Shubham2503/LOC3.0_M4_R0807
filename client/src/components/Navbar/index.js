@@ -3,9 +3,17 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { Link } from "react-router-dom"
 import styles from './index.module.css'
+import Cookies from "js-cookie"
 
 
-const Navbr = () => {
+const Navbr = (props) => {
+
+    Cookies.remove('id');
+
+    const logout = () => {
+        props.is_loaded(false)
+    }
+
     return (
         <div className={styles.container}>
             <Navbar collapseOnSelect expand="md">
@@ -27,6 +35,12 @@ const Navbr = () => {
                         </Nav.Item> 
                         <Nav.Item>
                             <Link className={styles.navLink} to="/user">User</Link>
+                        </Nav.Item> 
+                        <Nav.Item>
+                            <Link className={styles.navLink} to="/user">User</Link>
+                        </Nav.Item> 
+                        <Nav.Item>
+                            <Link onClick = {logout} className={styles.navLink} to="/logout">Logout</Link>
                         </Nav.Item> 
                         {/* <Nav.Item>
                             <Link className={styles.navLink}to="/alltransaction" >Transaction</Link>
