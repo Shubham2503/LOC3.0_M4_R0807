@@ -13,10 +13,6 @@ const PostSchema = new Schema(
             type: Number,
             default: 0,
         },
-        isNSFW: {
-            type: Boolean,
-            default: false,
-        },
         images: String,
         user: { type: Schema.Types.ObjectId, ref: "User" },
         tags: [

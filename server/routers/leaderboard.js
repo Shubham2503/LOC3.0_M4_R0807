@@ -12,9 +12,25 @@ router.get("/score", async (req, res) => {
     res.send(data);
 });
 
+router.get("/steps", async (req, res) => {
+    const data = await User.find({});
+    data.sort((a, b) => {
+        return b.steps - a.steps;
+    });
+    res.send(data);
+});
+
+router.get("/calories", async (req, res) => {
+    const data = await User.find({});
+    data.sort((a, b) => {
+        return b.calories - a.calories;
+    });
+    res.send(data);
+});
+
+
 router.get("/user", async (req, res) => {
     const newUser = new User(req.body);
-    console.log("fasdf");
     try {
         await newUser.save();
         res.status(201).send(newUser);

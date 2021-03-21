@@ -30,12 +30,12 @@ const UserSchema = new Schema(
                 },
             },
         ],
-
+        steps: Number,
+        calories: Number,
         score: {
             type: Number,
             default: 0,
         },
-
         goals: [
             {
                 title: String,
