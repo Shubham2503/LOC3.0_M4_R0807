@@ -43,7 +43,6 @@ router.get("/user", async (req, res) => {
 router.post("/user/login", async (req, res) => {
 
     const user = await User.findOne({email: req.body.email});
-    const isValid = await bcrypt.compare(password, foundUser.password);
     if(user && await bcrypt.compare(req.body.password, user.password ))
     {
         req.session.id = user._id;

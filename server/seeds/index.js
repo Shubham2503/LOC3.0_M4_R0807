@@ -81,7 +81,7 @@ const seedDB = async () => {
         calories: 0,
         steps: 0
     });
-
+    luser.save();
     for(let i = 1; i < usernameArr.length; i++)
     {
         let user = new User({
