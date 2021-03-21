@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Card, Button, Badge, Col, Row, Container} from 'react-bootstrap'
 import styles from './index.module.css'
 import { Link } from "react-router-dom"
+import Cookies from "js-cookie"
 
 const Home = () => {
     const [data, setData] = useState(null)
@@ -38,7 +39,7 @@ const Home = () => {
     }
 
     const handleFriendClick = async () => {
-        await axios.get('/post/getFriendsPost/6055fd6eb17d53243c8015c1')
+        await axios.get(`/post/getFriendsPost/${Cookies.get('id')}`)
         .then(res => {
             setData(res.data)
         }).catch(err => {

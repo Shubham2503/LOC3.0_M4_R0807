@@ -3,6 +3,8 @@ import styles from './index.module.css'
 import { Form, Button, Col, Modal, Table } from 'react-bootstrap'
 import axios from 'axios'
 import Notification from '../../components/Notification'
+import Cookies from "js-cookie"
+
 
 const Goal = () => {
     const [title, setTitle] = useState('')
@@ -15,6 +17,8 @@ const Goal = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    console.log(Cookies.get('id'))
+
     const handleNotification = () => {
         setShowNotification(true)
         setTimeout(() => setShowNotification(false), 
@@ -24,7 +28,7 @@ const Goal = () => {
 
     const handleClick = async () => {
         handleNotification()
-        await axios.post('/goals/6055fd6eb17d53243c8015c1', {
+        await axios.post(`/goals/${Cookies.get('id')}`, {
             title,
             description: desc,
             time
@@ -42,7 +46,7 @@ const Goal = () => {
     },[])
 
     const getData = async () => {
-        await axios.get('/goals/6055fd6eb17d53243c8015c1')
+        await axios.get(`/goals/${Cookies.get('id')}`)
         .then(res => {
             setData(res.data)
         }).catch(err => {
