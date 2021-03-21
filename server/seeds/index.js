@@ -96,7 +96,7 @@ const seedDB = async () => {
             calories: Math.floor((Math.random() * 800) + 100),
             steps: Math.floor((Math.random() * 30000) + 1000),
             friends: [luser],
-            goals: {title: makeid(3), description: 'aezakmi hello', time:'0830'}
+            goals: {title: makeid(3), description: 'aezakmi hello', time:'08:30'}
         })
 
         
