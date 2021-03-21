@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
 import styles from './App.module.css'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Home from './pages/Home'
@@ -13,6 +13,8 @@ import User from './pages/User'
 import Notification from './components/Notification'
 import Navbar from './components/Navbar'
 import Navbar1 from './components/Navbar1'
+import Cookies from "js-cookie"
+
 
 const App = () => {
 
@@ -20,6 +22,12 @@ const App = () => {
     const is_loaded = (data) => {
         setIsLogedin(data)
     }
+
+    useEffect(() => {
+        if(Cookies.get('id'))
+            setIsLogedin(true)
+    }, [])
+
     if(!isLogedin)
         return (
             <div className={styles.container}>
