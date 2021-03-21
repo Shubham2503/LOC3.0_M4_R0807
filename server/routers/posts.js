@@ -26,10 +26,10 @@ const isNSFW = (req, res, next) => {
 
             const sfw = t.result.categories.find((el) => el.name.en === "safe");
 
-            if (sfw && sfw.confidence > 90) {
+            if (sfw && sfw.confidence > 80) {
                 next();
             } else {
-                res.status(400).send("nsfw safe val less than 90");
+                res.status(400).send("nsfw safe val less than 90 ");
             }
         } catch (error) {
             res.status(400).send(error);

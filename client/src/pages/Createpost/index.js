@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./index.module.css";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, Modal } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie"
 
@@ -11,6 +11,10 @@ const Createpost = () => {
     const [tag1, setTag1] = useState("");
     const [tag2, setTag2] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
+    const [show, setShow] = useState(false)
+    const [iserror, setIserror] = useState(false)
+
+
 
     const handleClick = async () => {
         await axios
@@ -21,9 +25,15 @@ const Createpost = () => {
                 images: url,
                 tags: [{ tag: tag1 }, { tag: tag2 }],
             })
-            .then((res) => {})
+            .then((res) => {
+                console.log(res)
+                setShow(true)
+                setIserror(false)
+            })
             .catch((err) => {
                 console.log(err);
+                setShow(true)
+                setIserror(true)
             });
     };
 
@@ -84,6 +94,23 @@ const Createpost = () => {
                     Submit
                 </Button>
             </Form>
+
+
+            <Modal show={show} onHide={() => setShow(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>POST</Modal.Title>
+                </Modal.Header>
+                {
+                    !iserror ? <Modal.Body>Woohoo, post added successfuly</Modal.Body> :
+                        <Modal.Body>opsee, something went wrong with your post check whether your post containt explicit content.</Modal.Body>
+                }
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShow(false)}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
         </div>
     );
 };
