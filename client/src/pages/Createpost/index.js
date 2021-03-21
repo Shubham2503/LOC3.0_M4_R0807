@@ -105,9 +105,17 @@ const Createpost = () => {
                         <Modal.Body>opsee, something went wrong with your post check whether your post containt explicit content.</Modal.Body>
                 }
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShow(false)}>
-                        Close
-                    </Button>
+                    {
+                        !iserror ? 
+                        <Button variant="success" onClick={() => setShow(false)}>
+                            Close
+                        </Button>
+                        :
+                        <Button variant="danger" onClick={() => setShow(false)}>
+                            Close
+                        </Button>
+
+                    }
                 </Modal.Footer>
             </Modal>
 
