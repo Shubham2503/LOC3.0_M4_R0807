@@ -8,10 +8,10 @@ import Cookies from "js-cookie"
 
 const Navbr = (props) => {
 
-    Cookies.remove('id');
-
+    
     const logout = () => {
         props.is_loaded(false)
+        Cookies.remove('id')
     }
 
     return (
@@ -35,10 +35,7 @@ const Navbr = (props) => {
                         </Nav.Item> 
                         <Nav.Item>
                             <Link className={styles.navLink} to="/user">User</Link>
-                        </Nav.Item> 
-                        <Nav.Item>
-                            <Link className={styles.navLink} to="/user">User</Link>
-                        </Nav.Item> 
+                        </Nav.Item>  
                         <Nav.Item>
                             <Link onClick = {logout} className={styles.navLink} to="/logout">Logout</Link>
                         </Nav.Item> 

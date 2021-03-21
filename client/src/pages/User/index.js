@@ -19,6 +19,7 @@ const User = () => {
     useEffect(() => {
         getData();
     }, []);
+    console.log(Cookies.get("id"))
     const getData = async () => {
         await axios
             .get(`/user/${Cookies.get("id")}`)

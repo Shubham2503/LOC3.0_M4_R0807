@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./index.module.css";
 import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
+import Cookies from "js-cookie"
 
 const Createpost = () => {
     const [title, setTitle] = useState("");
@@ -14,6 +15,7 @@ const Createpost = () => {
     const handleClick = async () => {
         await axios
             .post("/post/create", {
+                user: Cookies.get("id"),
                 title,
                 description: desc,
                 images: url,
@@ -78,7 +80,7 @@ const Createpost = () => {
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" onClick={handleClick}>
+                <Button variant="primary" onClick={handleClick}>
                     Submit
                 </Button>
             </Form>
