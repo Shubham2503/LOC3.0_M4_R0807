@@ -66,8 +66,7 @@ img = [
 ];
 
 const seedDB = async () => {
-    await User.deleteMany({});
-    await Post.deleteMany({});
+    
 
     let luser = new User({
         username: 'aaa',
@@ -121,6 +120,117 @@ seedDB().then(() => {
     mongoose.connection.close();
 })
 
+const temp = async () => {
+    await User.deleteMany({});
+    await Post.deleteMany({});
+
+    let user0 = new User({
+        username: 'Sahil Shende',
+        email: 'sahil@gmail.com',
+        password: 'sahil',
+        score:  40,
+        weight: 0, 
+        height: 0,
+        age: 0,
+        gender: 'male',
+        calories: 0,
+        steps: 0
+    });
+
+    let user1= new User({
+        username: 'Ismail',
+        email: 'ismail@gmail.com',
+        password: 'ismail',
+        score:  20,
+        weight: 0, 
+        height: 0,
+        age: 0,
+        gender: 'male',
+        calories: 0,
+        steps: 0
+    });
+
+    let user2= new User({
+        username: 'Shubham Patel',
+        email: 'shubham@gmail.com',
+        password: 'shubham',
+        score:  10,
+        weight: 0, 
+        height: 0,
+        age: 0,
+        gender: 'male',
+        calories: 0,
+        steps: 0
+    });
+
+    let user3= new User({
+        username: 'Harsh',
+        email: 'harsh@gmail.com',
+        password: 'harsh',
+        score:  66,
+        weight: 0, 
+        height: 0,
+        age: 0,
+        gender: 'male',
+        calories: 0,
+        steps: 0
+    });
+
+    user2.friends.push(user0, user1, user3);
+    user3.friends.push(user0, user1, user2);
+    user1.friends.push(user0, user3, user2);
+    user0.friends.push(user1, user3, user2);
+
+    user2.goals.push({title: "Meditate", description: "Be mindfull", time: "06:00"});
+    user1.goals.push({title: "Pushups", description: "Work Hard", time: "08:00"});
+    
+    await user0.save();
+    await user1.save();
+    await user2.save();
+    await user3.save();
+
+    let post = new Post({
+        title: "GET FIT WORKOUT PLAN", 
+        description: 'Welcome to the world of personalization, where a workout plan isn’t just a series of good exercises – it’s a prescription for your body based on your needs. Before anyone should hands you a workout plan (or you select one online), you need to understand what your body needs.',
+        likes: Math.floor((Math.random() * 100) + 0),
+        user: user0,
+        images: 'https://i0.wp.com/www.bornfitness.com/wp-content/uploads/2017/03/shutterstock_289939856.jpg?fit=5926%2C4912&ssl=1',
+        tags: [{tag: 'workout plan'}, {tag: 'work hard'}]
+    })
+    await post.save();
+
+    post = new Post({
+        title: "HOW TO PREVENT KNEE\, BACK\,AND SHOULDER INJURIES", 
+        description: 'Training in the gym is one of the safest things you can do. But bad movement patterns can make some exercises risky. Here’s how to correct issues before they become injuries.Bottom line: Weightlifting is surprisingly safe, so you don’t need to spend much time worrying about.',
+        likes: Math.floor((Math.random() * 100) + 0),
+        user: user1,
+        images: 'https://i0.wp.com/www.bornfitness.com/wp-content/uploads/2018/01/weight_lifting_safety_tips_born_fitness.jpg?fit=1920%2C1080&ssl=1',
+        tags: [{tag: 'saftey'}, {tag: 'prevention'}]
+    })
+    await post.save();
+
+    post = new Post({
+        title: "HOW TO USE RESISTANCE BAND EXERCISES IN YOUR WORKOUTS", 
+        description: 'Underrated and underused, resistance band exercises can help you build muscle, improve your flexibility, allow you to train hard at home, and upgrade your workouts. Here\'s how to get the best results.',
+        likes: Math.floor((Math.random() * 100) + 0),
+        user: user3,
+        images: 'https://i2.wp.com/www.bornfitness.com/wp-content/uploads/2017/12/resistance_band_workout_born_fitness.jpg?fit=1920%2C1080&ssl=1',
+        tags: [{tag: 'resistance band'}, {tag: 'muscle'}]
+    })
+    await post.save();
+
+    post = new Post({
+        title: "HOW TO OVERCOME LOST MOTIVATIONS", 
+        description: 'You start a plan, feel excited, and dive in with extreme compliance. Eventually (usually around the 4-week mark), you’ve suddenly lost motivation, almost as if it was sucked from your body.',
+        likes: Math.floor((Math.random() * 100) + 0),
+        user: user0,
+        images: 'https://i2.wp.com/www.bornfitness.com/wp-content/uploads/2017/12/BF_valsalva_lead_image.jpg?fit=1920%2C1080&ssl=1',
+        tags: [{tag: 'motivation'}, {tag: 'workout'}]
+    })
+    await post.save();
+};
+
+// temp();
 
 app.listen(port, () => {
     console.log(`server is running on ${port}`);
