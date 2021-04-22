@@ -181,9 +181,9 @@ const Createpost = () => {
                                 multiline
                                 placeholder="Enter the title"
                                 id="outlined-size-normal"
-                                variant="outlined"
+                                variant="filled"
                                 color="secondary"
-                                name="title"
+                                label="Title"
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </Container>
@@ -194,6 +194,7 @@ const Createpost = () => {
                                 id="outlined-size-normal"
                                 variant="outlined"
                                 color="secondary"
+                                label="Description"
                                 onChange={(e) => setDesc(e.target.value)}
                             />
                         </Container>
@@ -204,6 +205,7 @@ const Createpost = () => {
                                 variant="outlined"
                                 color="secondary"
                                 name="tag1"
+                                label="Tag1"
                                 onChange={(e) => setTag1(e.target.value)}
                             />
                         </Container>
@@ -214,15 +216,18 @@ const Createpost = () => {
                                 variant="outlined"
                                 color="secondary"
                                 name="tag2"
+                                label="Tag2"
                                 onChange={(e) => setTag2(e.target.value)}
                             />
                         </Container>
                         <Container style={{ padding: "1rem" }}>
                             <TextField
                                 placeholder="Image URL"
-                                id="outlined-size-normal"
-                                variant="outlined"
+                                id="filled-search"
+                                variant="filled"
                                 color="secondary"
+                                type="search"
+                                label="URL"
                                 onChange={(e) => setUrl(e.target.value)}
                             />
                         </Container>
