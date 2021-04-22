@@ -4,6 +4,7 @@ const Post = require("../models/post");
 const multer = require("multer");
 const got = require("got");
 const auth = require("../middleware/auth");
+const User = require("../models/user");
 
 // endpoint to create the post
 const isNSFW = (req, res, next) => {
@@ -41,6 +42,7 @@ router.post("/post/create", auth, isNSFW, async (req, res) => {
     try {
         await newPost.save();
         res.status(201).send(newPost);
+        // we have to add the count of the hashtags of the
     } catch (e) {
         res.status(400).send(e);
     }
@@ -126,6 +128,19 @@ router.get("/post/searchByTag/:tag", auth, async (req, res) => {
         res.status(200).send(posts);
     } catch (e) {
         res.status(400).send(e);
+    }
+});
+
+//get all post of friends of user
+router.get("/post/getFriendsPost/:id", async (req, res) => {
+    const _id = req.params.id;
+    try {
+        const user = await User.findById(_id);
+        const friends = user.friends;
+        const friendsPost = await Post.find({ user: { $in: friends } });
+        res.status(200).send(friendsPost);
+    } catch (e) {
+        res.status(400).send();
     }
 });
 
