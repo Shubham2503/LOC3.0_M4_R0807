@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import styles from "./index.module.css";
-import { Form, Button, Col, Modal } from "react-bootstrap";
+import { Form, Col, Modal } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { makeStyles } from "@material-ui/core/styles";
 import Chart from "../../components/Chart";
+import AddIcon from "@material-ui/icons/Add";
+import SaveIcon from "@material-ui/icons/Save";
+import Button from "@material-ui/core/Button";
 import {
     IconButton,
     Container,
@@ -170,40 +173,50 @@ const Createpost = () => {
             </div>
             <Container style={{ width: "80%", marginTop: "5rem" }}>
                 <Paper style={{}}>
-                    <div className={classes.root}>
-                        <Grid container spacing={5}>
-                            <Container style={{ padding: "1rem" }}>
-                                <Typography variant="h4">
-                                    Create Post
-                                </Typography>
-                            </Container>
-                            <Container style={{ padding: "1rem" }}>
-                                <TextField
-                                    // label="e.g. 2 Bananas"
-                                    autoFocus="true"
-                                    placeholder="Enter the title"
-                                    id="outlined-size-normal"
-                                    variant="outlined"
-                                    color="secondary"
-                                    label="Title"
-                                    onChange={(e) => setTitle(e.target.value)}
-                                />
-                            </Container>
-
-                            <Container style={{ padding: "1rem" }}>
-                                <TextField
-                                    placeholder="Add Desciption"
-                                    id="outlined-size-normal"
-                                    variant="outlined"
-                                    multiline
-                                    color="secondary"
-                                    label="Description"
-                                    onChange={(e) => setDesc(e.target.value)}
-                                />
-                            </Container>
-                            <Grid item xs={6}>
+                    <Container>
+                        <div className={classes.root}>
+                            <Grid container spacing={2} xs={12}>
                                 <Container style={{ padding: "1rem" }}>
+                                    <center>
+                                        <Typography variant="h4">
+                                            Create Post
+                                        </Typography>
+                                    </center>
+                                </Container>
+                                <Grid item xs={12}>
                                     <TextField
+                                        style={{ width: "100%" }}
+                                        // label="e.g. 2 Bananas"
+                                        autoFocus="true"
+                                        placeholder="Enter the title"
+                                        id="outlined-size-normal"
+                                        variant="outlined"
+                                        color="secondary"
+                                        label="Title"
+                                        onChange={(e) =>
+                                            setTitle(e.target.value)
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        placeholder="Add Desciption"
+                                        style={{ width: "100%" }}
+                                        id="outlined-size-normal"
+                                        variant="outlined"
+                                        multiline
+                                        rows="5"
+                                        color="secondary"
+                                        label="Description"
+                                        onChange={(e) =>
+                                            setDesc(e.target.value)
+                                        }
+                                    />
+                                </Grid>
+
+                                <Grid item xs={6}>
+                                    <TextField
+                                        style={{ width: "100%" }}
                                         placeholder="Tag 1"
                                         id="outlined-size-normal"
                                         variant="outlined"
@@ -214,11 +227,10 @@ const Createpost = () => {
                                             setTag1(e.target.value)
                                         }
                                     />
-                                </Container>
-                            </Grid>
-                            <Grid item xs={6}>
-                                <Container style={{ padding: "1rem" }}>
+                                </Grid>
+                                <Grid item xs={6}>
                                     <TextField
+                                        style={{ width: "100%" }}
                                         placeholder="Tag 2"
                                         id="outlined-size-normal"
                                         variant="outlined"
@@ -229,27 +241,34 @@ const Createpost = () => {
                                             setTag2(e.target.value)
                                         }
                                     />
-                                </Container>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <Container style={{ padding: "1rem" }}>
+                                </Grid>
+                                <Grid item xs={12}>
                                     <TextField
                                         placeholder="Image URL"
+                                        style={{ width: "100%" }}
                                         id="filled-search"
                                         variant="outlined"
                                         color="secondary"
                                         label="Image URL"
                                         onChange={(e) => setUrl(e.target.value)}
                                     />
-                                </Container>
+                                </Grid>
+                                <Grid item xs={6}></Grid>
+                                <Grid item xs={3}></Grid>
+                                <Grid item xs={1}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        size="large"
+                                        startIcon={<SaveIcon />}
+                                        onClick={handleClick}
+                                    >
+                                        Save
+                                    </Button>
+                                </Grid>
                             </Grid>
-                            <Grid item xs={3}>
-                                <Button variant="primary" onClick={handleClick}>
-                                    Submit
-                                </Button>
-                            </Grid>
-                        </Grid>
-                    </div>
+                        </div>
+                    </Container>
                 </Paper>
             </Container>
         </>
