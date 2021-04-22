@@ -86,15 +86,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -102,11 +94,11 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <StyledTableCell align={"center"} padding={"default"}>
+        <TableCell align={"center"} padding={"default"}>
           #
-        </StyledTableCell>
+        </TableCell>
         {headCells.map((headCell) => (
-          <StyledTableCell
+          <TableCell
             key={headCell.id}
             align={headCell.numeric ? "right" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
@@ -124,7 +116,7 @@ function EnhancedTableHead(props) {
                 </span>
               ) : null}
             </TableSortLabel>
-          </StyledTableCell>
+          </TableCell>
         ))}
       </TableRow>
     </TableHead>
@@ -295,8 +287,6 @@ export default function EnhancedTable(props) {
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
