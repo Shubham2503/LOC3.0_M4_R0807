@@ -7,6 +7,7 @@ import Cookies from "js-cookie";
 import { useHistory } from "react-router";
 
 import {
+  Divider,
   Drawer,
   IconButton,
   List,
@@ -33,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  list: {
+    width: 250,
+  },
 }));
 
 const Navbr = (props) => {
@@ -47,7 +51,7 @@ const Navbr = (props) => {
 
   return (
     <div>
-      <AppBar color="secondary" position="static">
+      <AppBar color="primary" position="static">
         <Toolbar>
           <IconButton
             edge="start"
@@ -68,13 +72,15 @@ const Navbr = (props) => {
       </AppBar>
 
       <Drawer
+        className={"hello"}
         anchor="left"
         open={drawerOpen}
         onClose={() => {
-          setDrawerOpen(true);
+          setDrawerOpen(!drawerOpen);
         }}
       >
-        <List>
+        <Divider />
+        <List style={{ width: "250px" }}>
           {["Scoreboard", "Exercise", "Goal", "Create Post"].map(
             (text, index) => (
               <div
