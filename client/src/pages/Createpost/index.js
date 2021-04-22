@@ -169,7 +169,7 @@ const Createpost = () => {
                 </Modal>
             </div>
             <Container style={{ width: "80%", marginTop: "5rem" }}>
-                <Paper>
+                <Paper style={{}}>
                     <Grid item xs={12}>
                         <Container style={{ padding: "1rem" }}>
                             <Typography variant="h4">Create Post</Typography>
@@ -178,10 +178,9 @@ const Createpost = () => {
                             <TextField
                                 // label="e.g. 2 Bananas"
                                 autoFocus="true"
-                                multiline
                                 placeholder="Enter the title"
                                 id="outlined-size-normal"
-                                variant="filled"
+                                variant="outlined"
                                 color="secondary"
                                 label="Title"
                                 onChange={(e) => setTitle(e.target.value)}
@@ -193,6 +192,7 @@ const Createpost = () => {
                                 placeholder="Add Desciption"
                                 id="outlined-size-normal"
                                 variant="outlined"
+                                multiline
                                 color="secondary"
                                 label="Description"
                                 onChange={(e) => setDesc(e.target.value)}
@@ -224,10 +224,9 @@ const Createpost = () => {
                             <TextField
                                 placeholder="Image URL"
                                 id="filled-search"
-                                variant="filled"
+                                variant="outlined"
                                 color="secondary"
-                                type="search"
-                                label="URL"
+                                label="Image URL"
                                 onChange={(e) => setUrl(e.target.value)}
                             />
                         </Container>
