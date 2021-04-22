@@ -20,13 +20,14 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Grid from '@material-ui/core/Grid'
+import Chip from '@material-ui/core/Chip'
 
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
-        height: 530
+        height: 570
     },
     media: {
         height: 0,
@@ -99,7 +100,7 @@ const Home = () => {
     if (data === null)
         return null
     return (
-        <>
+        <div className={styles.container}>
             {/* <Container md={3} className={styles.container}>
             <Button variant="primary" className={styles.button} onClick={handleFriendClick}>
                 View Friend's posts
@@ -137,6 +138,9 @@ const Home = () => {
             }
             </Row>                 
             </Container> */}
+            <Button variant="primary" className={styles.button} onClick={handleFriendClick}>
+                View Friend's posts
+            </Button>
             <Grid
                 container
                 direction="row"
@@ -151,7 +155,7 @@ const Home = () => {
                                 <Card className={classes.root}>
                                     <CardHeader
                                         avatar={
-                                            <Avatar aria-label="recipe" className={classes.avatar} style={{backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16)}}>
+                                            <Avatar aria-label="recipe" className={classes.avatar} style={{ backgroundColor: '#' + Math.floor(Math.random() * 16777215).toString(16) }}>
                                                 {val.title.slice(0, 1)}
                                             </Avatar>
                                         }
@@ -163,6 +167,19 @@ const Home = () => {
                                         className={classes.media}
                                         image={val.images}
                                     />
+                                    <div className={styles.badge}>
+                                        {(val.tags.length > 0) && (
+                                            <>
+                                                <Badge pill variant="primary">
+                                                    <Link className={styles.navLink} to={"/post/" + val.tags[0].tag} onClick={updateCount}>{val.tags[0].tag}</Link>
+                                                </Badge>{' '}
+                                                <Badge pill variant="success">
+                                                    <Link className={styles.navLink} to={"/post/" + val.tags[1].tag} onClick={updateCount}>{val.tags[1].tag}</Link>
+                                                </Badge>
+                                                <br />
+                                            </>
+                                        )}
+                                    </div>
                                     <CardContent>
                                         <Typography variant="body2" color="textSecondary" component="p">
                                             {val.description}
@@ -186,7 +203,7 @@ const Home = () => {
                 }
                 )}
             </Grid>
-        </>
+        </div>
     )
 }
 
