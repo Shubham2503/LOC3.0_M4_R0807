@@ -1,17 +1,61 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import {Card, Button, Badge, Col, Row, Container} from 'react-bootstrap'
+import { Card, Button, Badge, Col, Row, Container } from 'react-bootstrap'
 import styles from './index.module.css'
 import { Link } from "react-router-dom"
 import Cookies from "js-cookie"
+import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import { red } from '@material-ui/core/colors';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import ShareIcon from '@material-ui/icons/Share';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        maxWidth: 345,
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+    },
+    expandOpen: {
+        transform: 'rotate(180deg)',
+    },
+    avatar: {
+        backgroundColor: red[500],
+    },
+}));
+
 
 const Home = () => {
     const [data, setData] = useState(null)
     const [count, setCount] = useState(10)
 
+    const classes = useStyles();
+    const [expanded, setExpanded] = React.useState(false);
+
     useEffect(() => {
         getData()
-    },[count])
+    }, [count])
 
     const updateCount = () => {
         const new_count = count + 1
@@ -21,37 +65,37 @@ const Home = () => {
 
     const getData = async () => {
         await axios.get('/post/getAllPost')
-        .then(res => {
-            setData(res.data)
-        }).catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                setData(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
     console.log(data)
     const handleClick = async (id) => {
-        await axios.post('/post/increaselike/'+ id)
-        .then(res => {
-            getData()
-        }).catch(err => {
-            console.log(err)
-        })
+        await axios.post('/post/increaselike/' + id)
+            .then(res => {
+                getData()
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
     const handleFriendClick = async () => {
         await axios.get(`/post/getFriendsPost/${Cookies.get('id')}`)
-        .then(res => {
-            setData(res.data)
-        }).catch(err => {
-            console.log(err)
-        })
+            .then(res => {
+                setData(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
     }
 
-    if(data === null)
-    return null
+    if (data === null)
+        return null
     return (
         <>
-        <Container md={3} className={styles.container}>
+            {/* <Container md={3} className={styles.container}>
             <Button variant="primary" className={styles.button} onClick={handleFriendClick}>
                 View Friend's posts
             </Button>
@@ -87,7 +131,47 @@ const Home = () => {
                 })
             }
             </Row>                 
-            </Container>
+            </Container> */}
+            <Row>
+                {data.map((val, ind) => {
+                    return (
+                        <>
+                            <Card className={classes.root}>
+                                <CardHeader
+                                    avatar={
+                                        <Avatar aria-label="recipe" className={classes.avatar}>
+                                            {val.title.slice(0, 1)}
+                                        </Avatar>
+                                    }
+                                    title={val.title}
+                                    subheader={val.createdAt.slice(0, 10)}
+                                />
+                                <CardMedia
+                                    className={classes.media}
+                                    image={val.images}
+                                />
+                                <CardContent>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        {val.description}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions disableSpacing>
+                                    <IconButton aria-label="add to favorites" onClick={(e) => {
+                                        handleClick(val._id)
+                                        updateCount()
+                                    }}>
+                                        <FavoriteIcon />
+                                    </IconButton>
+                                    <Typography variant="body2" color="textSecondary" component="p">
+                                        {val.likes}
+                                    </Typography>
+                                </CardActions>
+                            </Card>
+                        </>
+                    )
+                }
+                )}
+            </Row>
         </>
     )
 }
