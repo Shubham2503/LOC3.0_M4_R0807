@@ -1,28 +1,16 @@
 import React, { useState } from "react";
-import styles from "./index.module.css";
-import { Form, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import Chart from "../../components/Chart";
 import {
-  IconButton,
   Container,
   Grid,
   Paper,
   TextField,
-  Box,
-  Fab,
-  Tooltip,
-  Zoom,
-  Divider,
   Typography,
-  Snackbar,
-  CircularProgress,
 } from "@material-ui/core";
-import { Skeleton } from "@material-ui/lab";
-import { Send, Close } from "@material-ui/icons";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import LocalConvenienceStoreOutlinedIcon from "@material-ui/icons/LocalConvenienceStoreOutlined";
+import PieChart from "../../components/PieChart";
 
 const Exercise = () => {
   const [meal, setMeal] = useState("");
@@ -31,6 +19,20 @@ const Exercise = () => {
   const [calGained, setCalG] = useState(null);
   const [calLost, setCalL] = useState(null);
   const [score, setScore] = useState(0);
+  const [pieData, setPieData] = useState([
+    {
+      id: "calLost",
+      label: "Calories Lost",
+      value: 0,
+      color: "hsl(150, 100%, 40%)",
+    },
+    {
+      id: "calGained",
+      label: "Calories Gained",
+      value: 0,
+      color: "hsl(42, 70%, 50%)",
+    },
+  ]);
 
   const fetchMeal = async () => {
     const params = new URLSearchParams();
@@ -88,6 +90,23 @@ const Exercise = () => {
     await fetchMeal();
     await fetchEx();
     setScore((+calLost / +calGained).toFixed(2));
+    // let dat = pieData;
+    // dat[0].value = calLost;
+    // dat[1].value = calGained;
+    setPieData([
+      {
+        id: "calLost",
+        label: "Calories Lost",
+        value: calLost,
+        color: "hsl(150, 100%, 40%)",
+      },
+      {
+        id: "calGained",
+        label: "Calories Gained",
+        value: calGained,
+        color: "hsl(42, 70%, 50%)",
+      },
+    ]);
   };
   const submit = () => {
     console.log("submitted");
@@ -110,6 +129,7 @@ const Exercise = () => {
 
   return (
     <>
+      {/* <div style={{ width: "1000px", height: "1000px" }}></div> */}
       {/* <div className={styles.container}>
         <h2>Current Score : {score}</h2>
         <Form className="container">
@@ -224,6 +244,10 @@ const Exercise = () => {
               </Grid>
             </Grid>
           </Grid>
+
+          <Paper style={{ height: "20rem" }} elevation={0}>
+            <PieChart data={pieData}></PieChart>
+          </Paper>
 
           <Grid container spacing={3} style={{ margin: "1rem" }}>
             <Grid item xs={3}>

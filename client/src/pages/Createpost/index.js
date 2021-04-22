@@ -1,28 +1,10 @@
 import React, { useState } from "react";
 import styles from "./index.module.css";
-import { Form, Button, Col, Modal } from "react-bootstrap";
+import { Form, Button, Col, Modal, Container } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Skeleton } from "@material-ui/lab";
-import { Send, Close } from "@material-ui/icons";
-import {
-  IconButton,
-  FormControl,
-  FormGroup,
-  FormControlLabel,
-  Checkbox,
-  Container,
-  Grid,
-  Paper,
-  TextField,
-  Box,
-  Fab,
-  Tooltip,
-  Zoom,
-  Typography,
-  CircularProgress,
-  Snackbar,
-} from "@material-ui/core";
+import { Grid, Paper, TextField } from "@material-ui/core";
+import { ResponsivePie } from "@nivo/pie";
 
 const Createpost = () => {
   const [title, setTitle] = useState("");
@@ -55,6 +37,20 @@ const Createpost = () => {
       });
   };
 
+  const data = [
+    {
+      id: "hack",
+      label: "hack",
+      value: 494,
+      color: "hsl(344, 70%, 50%)",
+    },
+    {
+      id: "stylus",
+      label: "stylus",
+      value: 164,
+      color: "hsl(42, 70%, 50%)",
+    },
+  ];
   return (
     <>
       <div className={styles.container}>
