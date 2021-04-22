@@ -19,6 +19,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid'
 
 
 
@@ -132,10 +133,17 @@ const Home = () => {
             }
             </Row>                 
             </Container> */}
-            <Row>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center" 
+                spacing={3}
+            >
                 {data.map((val, ind) => {
                     return (
                         <>
+                        <Grid item xl={4}>
                             <Card className={classes.root}>
                                 <CardHeader
                                     avatar={
@@ -145,11 +153,11 @@ const Home = () => {
                                     }
                                     title={val.title}
                                     subheader={val.createdAt.slice(0, 10)}
-                                />
+                                    />
                                 <CardMedia
                                     className={classes.media}
                                     image={val.images}
-                                />
+                                    />
                                 <CardContent>
                                     <Typography variant="body2" color="textSecondary" component="p">
                                         {val.description}
@@ -167,11 +175,12 @@ const Home = () => {
                                     </Typography>
                                 </CardActions>
                             </Card>
+                            </Grid>
                         </>
                     )
                 }
                 )}
-            </Row>
+                </Grid>
         </>
     )
 }
