@@ -26,10 +26,14 @@ import Grid from '@material-ui/core/Grid'
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 345,
+        height: 530
     },
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
+    },
+    header: {
+        height: 100
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -41,9 +45,10 @@ const useStyles = makeStyles((theme) => ({
     expandOpen: {
         transform: 'rotate(180deg)',
     },
-    avatar: {
-        backgroundColor: red[500],
-    },
+    footer: {
+        position: 'absolute',
+        bottom: 0
+    }
 }));
 
 
@@ -91,7 +96,6 @@ const Home = () => {
                 console.log(err)
             })
     }
-
     if (data === null)
         return null
     return (
@@ -137,50 +141,51 @@ const Home = () => {
                 container
                 direction="row"
                 justify="center"
-                alignItems="center" 
-                spacing={3}
+                alignItems="end"
+                spacing={6}
             >
                 {data.map((val, ind) => {
                     return (
                         <>
-                        <Grid item xl={4}>
-                            <Card className={classes.root}>
-                                <CardHeader
-                                    avatar={
-                                        <Avatar aria-label="recipe" className={classes.avatar}>
-                                            {val.title.slice(0, 1)}
-                                        </Avatar>
-                                    }
-                                    title={val.title}
-                                    subheader={val.createdAt.slice(0, 10)}
+                            <Grid item xl={4}>
+                                <Card className={classes.root}>
+                                    <CardHeader
+                                        avatar={
+                                            <Avatar aria-label="recipe" className={classes.avatar} style={{backgroundColor: '#' + Math.floor(Math.random()*16777215).toString(16)}}>
+                                                {val.title.slice(0, 1)}
+                                            </Avatar>
+                                        }
+                                        className={classes.header}
+                                        title={val.title}
+                                        subheader={val.createdAt.slice(0, 10)}
                                     />
-                                <CardMedia
-                                    className={classes.media}
-                                    image={val.images}
+                                    <CardMedia
+                                        className={classes.media}
+                                        image={val.images}
                                     />
-                                <CardContent>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        {val.description}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions disableSpacing>
-                                    <IconButton aria-label="add to favorites" onClick={(e) => {
-                                        handleClick(val._id)
-                                        updateCount()
-                                    }}>
-                                        <FavoriteIcon />
-                                    </IconButton>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-                                        {val.likes}
-                                    </Typography>
-                                </CardActions>
-                            </Card>
+                                    <CardContent>
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            {val.description}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions disableSpacing className={classes.footer}>
+                                        <IconButton aria-label="add to favorites" onClick={(e) => {
+                                            handleClick(val._id)
+                                            updateCount()
+                                        }}>
+                                            <FavoriteIcon />
+                                        </IconButton>
+                                        <Typography variant="body2" color="textSecondary" component="p">
+                                            {val.likes}
+                                        </Typography>
+                                    </CardActions>
+                                </Card>
                             </Grid>
                         </>
                     )
                 }
                 )}
-                </Grid>
+            </Grid>
         </>
     )
 }
