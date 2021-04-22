@@ -56,9 +56,9 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
     const [data, setData] = useState(null)
     const [count, setCount] = useState(10)
-
-    const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+    const [liked, setLiked] = useState([])
+    const [colors, setColors] = useState([])
+    const classes = useStyles()
 
     useEffect(() => {
         getData()
@@ -74,12 +74,21 @@ const Home = () => {
         await axios.get('/post/getAllPost')
             .then(res => {
                 setData(res.data)
+                if(liked.length === 0) {
+                    let temp = []
+                    let temp_colors = []
+                    for(let i = 0;i < res.data.length; i++) {
+                        temp[i] = false
+                        temp_colors[i] = '#' + Math.floor(Math.random() * 16777215).toString(16)
+                    }
+                    setLiked(temp)
+                    setColors(temp_colors)
+                }
             }).catch(err => {
                 console.log(err)
             })
     }
 
-    console.log(data)
     const handleClick = async (id) => {
         await axios.post('/post/increaselike/' + id)
             .then(res => {
@@ -97,6 +106,7 @@ const Home = () => {
                 console.log(err)
             })
     }
+    console.log(liked)
     if (data === null)
         return null
     return (
@@ -155,7 +165,7 @@ const Home = () => {
                                 <Card className={classes.root}>
                                     <CardHeader
                                         avatar={
-                                            <Avatar aria-label="recipe" className={classes.avatar} style={{ backgroundColor: '#' + Math.floor(Math.random() * 16777215).toString(16) }}>
+                                            <Avatar aria-label="recipe" className={classes.avatar} style={{ backgroundColor: colors[ind]}}>
                                                 {val.title.slice(0, 1)}
                                             </Avatar>
                                         }
@@ -186,9 +196,12 @@ const Home = () => {
                                         </Typography>
                                     </CardContent>
                                     <CardActions disableSpacing className={classes.footer}>
-                                        <IconButton aria-label="add to favorites" onClick={(e) => {
+                                        <IconButton aria-label="add to favorites" style={liked[ind] ? {color: 'red'} : {}} onClick={(e) => {
                                             handleClick(val._id)
                                             updateCount()
+                                            let temp = liked
+                                            temp[ind] = !liked[ind]
+                                            setLiked(temp)
                                         }}>
                                             <FavoriteIcon />
                                         </IconButton>
