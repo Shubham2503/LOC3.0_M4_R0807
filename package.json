@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/Shubham2503/LOC_3.0#readme",
   "dependencies": {
-    "concurrently": "^6.0.0"
+    "@nivo/pie": "^0.67.0",
+    "concurrently": "^6.0.0",
+    "material-ui": "^1.0.0-beta.47"
   }
 }
