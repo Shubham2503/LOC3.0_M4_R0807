@@ -14,67 +14,66 @@ import Notification from "./components/Notification";
 import Navbar from "./components/Navbar";
 import Navbar1 from "./components/Navbar1";
 import Cookies from "js-cookie";
-
 const App = () => {
-  const [isLogedin, setIsLogedin] = useState(false);
-  const is_loaded = (data) => {
-    setIsLogedin(data);
-  };
+    const [isLogedin, setIsLogedin] = useState(false);
+    const is_loaded = (data) => {
+        setIsLogedin(data);
+    };
 
-  useEffect(() => {
-    if (Cookies.get("id")) setIsLogedin(true);
-  }, []);
+    useEffect(() => {
+        if (Cookies.get("id")) setIsLogedin(true);
+    }, []);
 
-  if (!isLogedin)
-    return (
-      <div className={styles.container}>
-        <Router>
-          <Navbar1 />
-          <Switch>
-            <Route path="login">
-              <Login is_loaded={is_loaded} />
-            </Route>
-            <Route path="/register">
-              <Register is_loaded={is_loaded} />
-            </Route>
+    if (!isLogedin)
+        return (
+            <div className={styles.container}>
+                <Router>
+                    <Navbar1 />
+                    <Switch>
+                        <Route path="login">
+                            <Login is_loaded={is_loaded} />
+                        </Route>
+                        <Route path="/register">
+                            <Register is_loaded={is_loaded} />
+                        </Route>
 
-            <Route path="/">
-              <Login is_loaded={is_loaded} />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
-    );
-  else
-    return (
-      <div className={styles.container}>
-        <Notification visible={false} />
-        <Router>
-          <Navbar is_loaded={is_loaded} />
-          <Switch>
-            <Route path="/scoreboard">
-              <Scoreboard />
-            </Route>
-            <Route path="/exercise">
-              <Exercise />
-            </Route>
-            <Route path="/createpost">
-              <Createpost />
-            </Route>
-            <Route path="/goal">
-              <Goal />
-            </Route>
-            <Route path="/user">
-              <User />
-            </Route>
-            <Route path="/post/:postid" component={Post_tag} />
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
-    );
+                        <Route path="/">
+                            <Login is_loaded={is_loaded} />
+                        </Route>
+                    </Switch>
+                </Router>
+            </div>
+        );
+    else
+        return (
+            <div className={styles.container}>
+                <Notification visible={false} />
+                <Router>
+                    <Navbar is_loaded={is_loaded} />
+                    <Switch>
+                        <Route path="/scoreboard">
+                            <Scoreboard />
+                        </Route>
+                        <Route path="/exercise">
+                            <Exercise />
+                        </Route>
+                        <Route path="/createpost">
+                            <Createpost />
+                        </Route>
+                        <Route path="/goal">
+                            <Goal />
+                        </Route>
+                        <Route path="/user">
+                            <User />
+                        </Route>
+                        <Route path="/post/:postid" component={Post_tag} />
+                        <Route path="/">
+                            <Home />
+                        </Route>
+                    </Switch>
+                </Router>
+            </div>
+        );
 };
 
 export default App;

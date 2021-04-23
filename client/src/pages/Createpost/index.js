@@ -13,6 +13,7 @@ import {
     TextField,
     Typography,
 } from "@material-ui/core";
+import StickyFooter from "../../components/Footer";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -190,6 +191,7 @@ const Createpost = () => {
                     </Container>
                 </Paper>
             </Container>
+            <StickyFooter />
         </>
     );
 };
