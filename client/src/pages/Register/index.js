@@ -3,6 +3,7 @@ import styles from "./index.module.css";
 import { Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
+import SignUp from "../../components/SignUp"
 
 const Register = (props) => {
     const [username, setUsername] = useState("");
@@ -30,7 +31,27 @@ const Register = (props) => {
             })
             .catch((err) => console.log(err.message));
     };
+    const setEmail1 = (e) => {
+        setEmail(e.target.value)
+    }
+    const setUsername1 = (e) => {
+        setUsername(e.target.value)
+    }
+    const setAge1 = (e) => {
+        setAge(e.target.value)
+    }
+    const setPassword1 = (e) => {
+        setPassword(e.target.value)
+    }
+    const setHeight1 = (e) => {
+        setHeight(e.target.value)
+    }
+    const setWeight1 = (e) => {
+        setWeight(e.target.value)
+    }
     return (
+        <>
+        <SignUp setEmail = {setEmail1} setAge = {setAge1} setHeight = {setHeight1} setPassword = {setPassword1} setUsername = {setUsername1} setWeight = {setWeight1}  />
         <div className={styles.box}>
             <h3>Register</h3>
             <Form className="container">
@@ -100,6 +121,7 @@ const Register = (props) => {
                 Register
             </Button>
         </div>
+        </>
     );
 };
 
