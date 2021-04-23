@@ -17,8 +17,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        Fittify
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -53,6 +53,7 @@ export default function SignUp({
   setPassword,
   setUsername,
   setWeight,
+  onSubmit,
 }) {
   const classes = useStyles();
 
@@ -66,7 +67,7 @@ export default function SignUp({
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form onSubmit={onSubmit} className={classes.form}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
