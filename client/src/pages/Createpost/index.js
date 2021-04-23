@@ -91,7 +91,7 @@ const Createpost = () => {
                 </Modal>
             </div>
             <Container style={{ width: "80%", marginTop: "5rem" }}>
-                <Paper style={{}}>
+                <Paper elevation="14">
                     <Container>
                         <div className={classes.root}>
                             <Grid container spacing={2} xs={12}>
