@@ -40,10 +40,10 @@ const Navbr = (props) => {
   const history = useHistory();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // const logout = () => {
-  //   props.is_loaded(false);
-  //   Cookies.remove("id");
-  // };
+  const logout = () => {
+    props.is_loaded(false);
+    Cookies.remove("id");
+  };
 
   return (
     <div>
@@ -64,7 +64,9 @@ const Navbr = (props) => {
           <Typography variant="h5" className={classes.title}>
             Fittfy
           </Typography>
-          <Button color="inherit">Logout</Button>
+          <Button onClick={logout} color="inherit">
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
 
