@@ -64,11 +64,11 @@ router.post("/user/login", async (req, res) => {
   // }
 });
 
-router.post("/score/update/:id", auth, async (req, res) => {
+router.post("/score/update/:id", async (req, res) => {
   const _id = req.params.id;
   try {
     const scoreToBeAdded = req.body.score;
-    console.log(req);
+
     await User.findByIdAndUpdate(
       { _id: _id },
       { $inc: { score: scoreToBeAdded } }

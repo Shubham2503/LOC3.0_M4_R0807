@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Container,
@@ -11,8 +11,16 @@ import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import LocalConvenienceStoreOutlinedIcon from "@material-ui/icons/LocalConvenienceStoreOutlined";
 import PieChart from "../../components/PieChart";
+import Cookies from "js-cookie";
 
 const Exercise = () => {
+  useEffect(() => {
+    if (calLost) {
+      const updateScore = (parseInt(calLost) * 100) / parseInt(calGained);
+      setScore(updateScore);
+    }
+  });
+
   const [meal, setMeal] = useState("");
   const [ex, setEx] = useState("");
   const [disp, setDisp] = useState("");
@@ -89,7 +97,7 @@ const Exercise = () => {
     //console.log("worked")
     await fetchMeal();
     await fetchEx();
-    setScore((+calLost / +calGained).toFixed(2));
+
     // let dat = pieData;
     // dat[0].value = calLost;
     // dat[1].value = calGained;
@@ -108,9 +116,13 @@ const Exercise = () => {
       },
     ]);
   };
-  const submit = () => {
-    console.log("submitted");
+  const submit = async () => {
     // submitting to rest api by getting user's id
+
+    await axios.post(`/score/update/${Cookies.get("id")}`, {
+      score: parseInt(score.toString()),
+    });
+    console.log("Updated");
   };
   const ipHandler1 = (e) => {
     setMeal(e.target.value);
