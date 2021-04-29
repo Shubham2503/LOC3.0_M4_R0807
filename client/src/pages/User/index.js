@@ -12,6 +12,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Typography, Avatar, TextField, Divider } from '@material-ui/core'
 import StickyFooter from "../../components/Footer";
 
 const User = () => {
@@ -46,6 +47,34 @@ const User = () => {
     return (
         <>
             <Container className={styles.container}>
+                <Avatar style={{height: '150px', width: '150px'}} alt="Remy Sharp" src="https://swarmandsting.com/wp-content/uploads/getty-images/2017/07/1201019072.jpeg" />
+                <Typography variant="h4" component="h4">
+                    {data.username}
+                </Typography>
+                <Typography variant="h6" component="h6">
+                    User Details
+                </Typography>
+                <Row className={styles.row}>
+                    <Col className={styles.col}>
+                        <p>Height : {data.height}</p>
+                        <p>Weight : {data.weight}</p>
+                    </Col>
+                    <Col className={styles.col}>
+                        <p>Age : {data.age}</p>
+                        <p>Gender : {data.gender}</p>
+                    </Col>
+                </Row>
+                <hr style={{ width:'100%' }}/>
+                <Typography variant="h6" component="h6">
+                    Add friends
+                </Typography>
+                <TextField className={styles.searchBox} id="outlined-basic" label="Enter UserId" variant="outlined" onChange={(e) => setUname(e.target.value)}/>
+                <Button variant="primary" onClick={handleClick}>
+                    Submit
+                </Button>
+                <hr style={{ width:'100%' }}/>
+            </Container>
+            {/* <Container className={styles.container}>
                 <Row>
                     <h2>User Details</h2>
                 </Row>
@@ -110,7 +139,7 @@ const User = () => {
                         </Table>
                     )}
                 </Row>
-            </Container>
+            </Container> */}
             <StickyFooter />
         </>
     );
