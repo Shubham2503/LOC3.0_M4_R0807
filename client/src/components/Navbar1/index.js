@@ -33,9 +33,14 @@ const Navbr = (props) => {
       <div className={classes.root}>
         <AppBar color="secondary" position="static">
           <Toolbar>
-            <Typography variant="h5" className={classes.title}>
+            <Typography
+              variant="h5"
+              className={classes.title}
+              onClick={() => {
+                history.push(`/`);
+              }}>
               Fittfy
-            </Typography>
+          </Typography>
             <Button onClick={() => history.push("/login")} color="inherit">
               Login
             </Button>
