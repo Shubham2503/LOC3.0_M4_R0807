@@ -27,6 +27,7 @@ const Exercise = () => {
     const [calGained, setCalG] = useState(null);
     const [calLost, setCalL] = useState(null);
     const [score, setScore] = useState(0);
+    const [count, setCount] = useState(0);
     const [pieData, setPieData] = useState([
         {
             id: "calLost",
@@ -41,6 +42,24 @@ const Exercise = () => {
             color: "hsl(42, 70%, 50%)",
         },
     ]);
+
+    useEffect(() => {
+
+        setPieData([
+            {
+                id: "calLost",
+                label: "Calories Lost",
+                value: calLost,
+                color: "hsl(150, 100%, 40%)",
+            },
+            {
+                id: "calGained",
+                label: "Calories Gained",
+                value: calGained,
+                color: "hsl(42, 70%, 50%)",
+            },
+        ]);
+    }, [count])
 
     const fetchMeal = async () => {
         const params = new URLSearchParams();
@@ -103,26 +122,11 @@ const Exercise = () => {
 
     const calculate = async (e) => {
         //console.log("worked")
-        await fetchMeal();
-        await fetchEx();
-
-        // let dat = pieData;
-        // dat[0].value = calLost;
-        // dat[1].value = calGained;
-        setPieData([
-            {
-                id: "calLost",
-                label: "Calories Lost",
-                value: calLost,
-                color: "hsl(150, 100%, 40%)",
-            },
-            {
-                id: "calGained",
-                label: "Calories Gained",
-                value: calGained,
-                color: "hsl(42, 70%, 50%)",
-            },
-        ]);
+        await fetchMeal().then(async () => {
+            await fetchEx().then(() => {
+                setCount(count + 1)
+            })
+        })
     };
     const submit = async () => {
         // submitting to rest api by getting user's id
@@ -211,7 +215,7 @@ const Exercise = () => {
                     <Grid item xs={12}>
                         <Container style={{ padding: "1rem" }}>
                             <Typography variant="h4">
-                                Current Score : {score}
+                                Current Score : {score.toPrecision(4)}
                             </Typography>
                         </Container>
 
@@ -266,10 +270,11 @@ const Exercise = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-
-                    <Paper style={{ height: "20rem" }} elevation={0}>
-                        <PieChart data={pieData}></PieChart>
-                    </Paper>
+                    {score !== 0 && (
+                        <Paper style={{ height: "20rem" }} elevation={0}>
+                            <PieChart data={pieData}></PieChart>
+                        </Paper>
+                    )}
 
                     <Grid container spacing={3} style={{ margin: "1rem" }}>
                         <Grid item xs={3}>
