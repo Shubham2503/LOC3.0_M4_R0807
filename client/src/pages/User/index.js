@@ -73,6 +73,38 @@ const User = () => {
                     Submit
                 </Button>
                 <hr style={{ width:'100%' }}/>
+                <Typography variant="h6" component="h6">
+                    Friend List
+                </Typography>
+                <Row style={{ width: "700px" }}>
+                    {data.friends !== null && (
+                        <Table
+                            className={styles.table}
+                            responsive
+                            striped
+                            bordered
+                            hover
+                            variant="dark"
+                        >
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Friends</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.friends.map((ele, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{ele.username}</td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </Table>
+                    )}
+                </Row>
             </Container>
             {/* <Container className={styles.container}>
                 <Row>
