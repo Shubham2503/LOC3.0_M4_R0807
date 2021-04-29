@@ -13,7 +13,6 @@ import {
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Typography, Avatar, TextField, Divider } from '@material-ui/core'
-import StickyFooter from "../../components/Footer";
 
 const User = () => {
     const [data, setData] = useState(null);
@@ -172,7 +171,6 @@ const User = () => {
                     )}
                 </Row>
             </Container> */}
-            <StickyFooter />
         </>
     );
 };

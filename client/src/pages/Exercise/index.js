@@ -12,7 +12,6 @@ import Button from "@material-ui/core/Button";
 import LocalConvenienceStoreOutlinedIcon from "@material-ui/icons/LocalConvenienceStoreOutlined";
 import PieChart from "../../components/PieChart";
 import Cookies from "js-cookie";
-import StickyFooter from "../../components/Footer";
 
 const Exercise = () => {
     useEffect(() => {
@@ -306,7 +305,6 @@ const Exercise = () => {
                     </Grid>
                 </Paper>
             </Container>
-            <StickyFooter />
         </>
     );
 };
