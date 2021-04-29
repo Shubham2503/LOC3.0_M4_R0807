@@ -4,7 +4,6 @@ import { Form, Button, Col, Modal, Table } from "react-bootstrap";
 import axios from "axios";
 import Notification from "../../components/Notification";
 import Cookies from "js-cookie";
-import StickyFooter from "../../components/Footer";
 
 const Goal = () => {
     const [title, setTitle] = useState("");
@@ -150,7 +149,6 @@ const Goal = () => {
                     </Table>
                 )}
             </div>
-            <StickyFooter />
         </>
     );
 };

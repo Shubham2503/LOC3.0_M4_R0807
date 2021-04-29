@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EnhancedTable from "../../components/ScoreTable";
-import StickyFooter from "../../components/Footer";
 import { Container } from "@material-ui/core";
 const Scoreboard = () => {
     const [score, setScore] = useState([]);
@@ -40,7 +39,6 @@ const Scoreboard = () => {
         </Grid> */}
                 <EnhancedTable score={score}></EnhancedTable>
             </Container>
-            <StickyFooter />
         </>
     );
 };

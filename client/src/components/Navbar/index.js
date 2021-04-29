@@ -61,7 +61,12 @@ const Navbr = (props) => {
               }}
             />
           </IconButton>
-          <Typography variant="h5" className={classes.title}>
+          <Typography
+            variant="h5"
+            className={classes.title}
+            onClick={() => {
+              history.push(`/`);
+            }}>
             Fittfy
           </Typography>
           <Button onClick={logout} color="inherit">

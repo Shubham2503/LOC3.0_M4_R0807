@@ -14,6 +14,8 @@ import Notification from "./components/Notification";
 import Navbar from "./components/Navbar";
 import Navbar1 from "./components/Navbar1";
 import Cookies from "js-cookie";
+import StickyFooter from './components/Footer'
+
 const App = () => {
     const [isLogedin, setIsLogedin] = useState(false);
     const is_loaded = (data) => {
@@ -71,6 +73,7 @@ const App = () => {
                             <Home />
                         </Route>
                     </Switch>
+                    <StickyFooter />
                 </Router>
             </div>
         );
