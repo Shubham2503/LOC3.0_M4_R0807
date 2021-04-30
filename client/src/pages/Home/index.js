@@ -22,7 +22,8 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 900,
+    maxWidth: 345,
+    height: 570,
   },
   media: {
     height: 0,
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   footer: {
+    position: "absolute",
     bottom: 0,
   },
 }));
