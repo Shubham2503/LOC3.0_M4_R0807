@@ -66,7 +66,8 @@ const Navbr = (props) => {
             className={classes.title}
             onClick={() => {
               history.push(`/`);
-            }}>
+            }}
+          >
             Fittfy
           </Typography>
           <Button onClick={logout} color="inherit">
@@ -85,32 +86,37 @@ const Navbr = (props) => {
       >
         <Divider />
         <List style={{ width: "250px" }}>
-          {["Scoreboard", "Exercise", "Goal", "Create Post", "User"].map(
-            (text, index) => (
-              <div
-                role="presentation"
+          {[
+            "Home",
+            "Scoreboard",
+            "Exercise",
+            "Goal",
+            "Create Post",
+            "User",
+          ].map((text, index) => (
+            <div
+              role="presentation"
+              onClick={() => {
+                setDrawerOpen(false);
+              }}
+              onKeyDown={() => {
+                setDrawerOpen(false);
+              }}
+            >
+              <ListItem
+                button
+                key={text}
                 onClick={() => {
-                  setDrawerOpen(false);
-                }}
-                onKeyDown={() => {
-                  setDrawerOpen(false);
+                  history.push(`/${text.toLowerCase().split(" ").join("")}`);
                 }}
               >
-                <ListItem
-                  button
-                  key={text}
-                  onClick={() => {
-                    history.push(`/${text.toLowerCase().split(" ").join("")}`);
-                  }}
-                >
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItem>
-              </div>
-            )
-          )}
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            </div>
+          ))}
         </List>
       </Drawer>
       <hr />
