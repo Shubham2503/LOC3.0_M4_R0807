@@ -76,9 +76,6 @@ const Navbr = (props) => {
                     <Button onClick={logout} color="inherit">
                         Logout
                     </Button>
-                    <Button onClick={home} color="inherit">
-                        Home
-                    </Button>
                 </Toolbar>
             </AppBar>
 
