@@ -12,6 +12,10 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Skeleton from "@material-ui/lab/Skeleton";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -56,6 +60,7 @@ const Goal = () => {
   const [data, setData] = useState(null);
   const [showNotification, setShowNotification] = useState(false);
   const [show, setShow] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -82,11 +87,20 @@ const Goal = () => {
       .catch((err) => {
         console.log(err);
       });
+    setOpen(true);
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const getData = async () => {
     await axios
@@ -164,7 +178,7 @@ const Goal = () => {
           </Modal.Footer>
         </Modal>
 
-        {data !== null && (
+        {data ? (
           <>
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="customized table">
@@ -194,7 +208,38 @@ const Goal = () => {
               </Table>
             </TableContainer>
           </>
+        ) : (
+          <div>
+            <Skeleton variant="text" />
+            <Skeleton variant="circle" width={40} height={40} />
+            <Skeleton variant="rect" width={1200} height={118} />
+          </div>
         )}
+      </div>
+
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleSnackClose}
+          message="Goal Added"
+          action={
+            <React.Fragment>
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleSnackClose}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </React.Fragment>
+          }
+        />
       </div>
     </>
   );
