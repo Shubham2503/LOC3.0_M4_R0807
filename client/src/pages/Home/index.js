@@ -22,8 +22,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
-    height: 570,
+    maxWidth: 900,
   },
   media: {
     height: 0,
@@ -43,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   footer: {
-    position: "absolute",
     bottom: 0,
   },
 }));
@@ -162,7 +160,6 @@ const Home = () => {
           justify="center"
           alignItems="end"
           spacing={6}
-          style={{width: '95vw'}}
         >
           {data ? (
             data.map((val, ind) => {
@@ -190,24 +187,24 @@ const Home = () => {
                       <div className={styles.badge}>
                         {val.tags.length > 0 && (
                           <>
-                            <Typography variant="p" display="inline">
+                            <Badge pill variant="primary">
                               <Link
                                 className={styles.navLink}
                                 to={"/post/" + val.tags[0].tag}
                                 onClick={updateCount}
                               >
-                                {"#" + val.tags[0].tag}
+                                {val.tags[0].tag}
                               </Link>
-                            </Typography>
-                            <Typography variant="p" display="inline">
+                            </Badge>{" "}
+                            <Badge pill variant="success">
                               <Link
                                 className={styles.navLink}
                                 to={"/post/" + val.tags[1].tag}
                                 onClick={updateCount}
                               >
-                                {"#" + val.tags[1].tag}
+                                {val.tags[1].tag}
                               </Link>
-                            </Typography>
+                            </Badge>
                             <br />
                           </>
                         )}
@@ -281,6 +278,9 @@ const Home = () => {
           message="Friend Added"
           action={
             <React.Fragment>
+              <Button color="secondary" onClick={handleClose}>
+                UNDO
+              </Button>
               <IconButton
                 size="small"
                 aria-label="close"
