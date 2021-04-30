@@ -160,6 +160,7 @@ const Home = () => {
           justify="center"
           alignItems="end"
           spacing={6}
+          style={{ width: '90vw' }}
         >
           {data ? (
             data.map((val, ind) => {
