@@ -14,7 +14,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Grid from "@material-ui/core/Grid";
-import StickyFooter from "../../components/Footer";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const useStyles = makeStyles((theme) => ({
@@ -244,7 +243,6 @@ const Home = () => {
           })}
         </Grid>
       </div>
-      <StickyFooter />
     </>
   );
 };
