@@ -173,7 +173,7 @@ const Home = () => {
                     <div className={styles.badge}>
                       {val.tags.length > 0 && (
                         <>
-                          <Badge pill variant="primary">
+                          <Badge pill variant="primary" style={{padding:'5px'}}>
                             <Link
                               className={styles.navLink}
                               to={"/post/" + val.tags[0].tag}
@@ -182,7 +182,7 @@ const Home = () => {
                               {val.tags[0].tag}
                             </Link>
                           </Badge>{" "}
-                          <Badge pill variant="success">
+                          <Badge pill variant="success" style={{padding:'5px'}}>
                             <Link
                               className={styles.navLink}
                               to={"/post/" + val.tags[1].tag}
