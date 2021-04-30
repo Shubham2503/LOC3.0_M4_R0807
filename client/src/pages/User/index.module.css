@@ -15,7 +15,7 @@
 }
 
 .searchBox {
-    padding: 5px;
+    margin: 10px;
     width: 400px;
 }
 
@@ -24,6 +24,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 p {
