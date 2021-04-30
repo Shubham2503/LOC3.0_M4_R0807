@@ -14,7 +14,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Grid from "@material-ui/core/Grid";
-import StickyFooter from "../../components/Footer";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
@@ -265,7 +264,6 @@ const Home = () => {
           )}
         </Grid>
       </div>
-      <StickyFooter />
 
       {/* snackbar */}
       <div>

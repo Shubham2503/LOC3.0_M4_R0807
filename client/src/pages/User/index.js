@@ -67,7 +67,7 @@ const User = () => {
                 <Typography variant="h6" component="h6">
                     Add friends
                 </Typography>
-                <TextField className={styles.searchBox} id="outlined-basic" label="Enter UserId" variant="outlined" onChange={(e) => setUname(e.target.value)} />
+                <TextField className={styles.searchBox} style={{margin: '10px'}} id="outlined-basic" label="Enter UserId" variant="outlined" onChange={(e) => setUname(e.target.value)} />
                 <Button variant="primary" onClick={handleClick}>
                     Submit
                 </Button>
@@ -103,7 +103,7 @@ const User = () => {
                     <Typography variant="h6" component="h6">
                         Friend List
                     </Typography>
-                    <List>
+                    <List className={styles.list}>
                         {data.friends.map((ele, index) =>
                         (<ListItem alignItems="flex-start" key={index}>
                             <ListItemAvatar>
