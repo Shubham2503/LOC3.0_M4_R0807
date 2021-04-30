@@ -190,24 +190,24 @@ const Home = () => {
                       <div className={styles.badge}>
                         {val.tags.length > 0 && (
                           <>
-                            <Badge pill variant="primary">
+                            <Typography variant="p" display="inline">
                               <Link
                                 className={styles.navLink}
                                 to={"/post/" + val.tags[0].tag}
                                 onClick={updateCount}
                               >
-                                {val.tags[0].tag}
+                                {"#" + val.tags[0].tag}
                               </Link>
-                            </Badge>{" "}
-                            <Badge pill variant="success">
+                            </Typography>
+                            <Typography variant="p" display="inline">
                               <Link
                                 className={styles.navLink}
                                 to={"/post/" + val.tags[1].tag}
                                 onClick={updateCount}
                               >
-                                {val.tags[1].tag}
+                                {"#" + val.tags[1].tag}
                               </Link>
-                            </Badge>
+                            </Typography>
                             <br />
                           </>
                         )}
