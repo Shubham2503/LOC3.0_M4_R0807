@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, Button, Badge, Col, Row, Container } from "react-bootstrap";
+import { Card, Badge, Col, Row, Container } from "react-bootstrap";
 import styles from "./index.module.css";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
@@ -16,6 +16,10 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import Grid from "@material-ui/core/Grid";
 import StickyFooter from "../../components/Footer";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import Snackbar from "@material-ui/core/Snackbar";
+import CloseIcon from "@material-ui/icons/Close";
+import Button from "@material-ui/core/Button";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +52,7 @@ const Home = () => {
   const [count, setCount] = useState(10);
   const [liked, setLiked] = useState([]);
   const [colors, setColors] = useState([]);
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -60,6 +65,7 @@ const Home = () => {
   };
 
   const addFriend = async (fid) => {
+    setOpen(true);
     await axios
       .post(`/friendById/${Cookies.get("id")}/${fid}`)
       .then((res) => {
@@ -131,7 +137,14 @@ const Home = () => {
       });
   };
 
-  if (data === null) return null;
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -149,102 +162,139 @@ const Home = () => {
           alignItems="end"
           spacing={6}
         >
-          {data.map((val, ind) => {
-            return (
-              <>
-                <Grid item xl={4}>
-                  <Card className={classes.root}>
-                    <CardHeader
-                      avatar={
-                        <Avatar
-                          aria-label="recipe"
-                          className={classes.avatar}
-                          style={{
-                            backgroundColor: colors[ind],
-                          }}
+          {data ? (
+            data.map((val, ind) => {
+              return (
+                <>
+                  <Grid item xl={4}>
+                    <Card className={classes.root}>
+                      <CardHeader
+                        avatar={
+                          <Avatar
+                            aria-label="recipe"
+                            className={classes.avatar}
+                            style={{
+                              backgroundColor: colors[ind],
+                            }}
+                          >
+                            {val.title.slice(0, 1)}
+                          </Avatar>
+                        }
+                        className={classes.header}
+                        title={val.title}
+                        subheader={val.createdAt.slice(0, 10)}
+                      />
+                      <CardMedia className={classes.media} image={val.images} />
+                      <div className={styles.badge}>
+                        {val.tags.length > 0 && (
+                          <>
+                            <Badge pill variant="primary">
+                              <Link
+                                className={styles.navLink}
+                                to={"/post/" + val.tags[0].tag}
+                                onClick={updateCount}
+                              >
+                                {val.tags[0].tag}
+                              </Link>
+                            </Badge>{" "}
+                            <Badge pill variant="success">
+                              <Link
+                                className={styles.navLink}
+                                to={"/post/" + val.tags[1].tag}
+                                onClick={updateCount}
+                              >
+                                {val.tags[1].tag}
+                              </Link>
+                            </Badge>
+                            <br />
+                          </>
+                        )}
+                      </div>
+                      <CardContent>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
                         >
-                          {val.title.slice(0, 1)}
-                        </Avatar>
-                      }
-                      className={classes.header}
-                      title={val.title}
-                      subheader={val.createdAt.slice(0, 10)}
-                    />
-                    <CardMedia className={classes.media} image={val.images} />
-                    <div className={styles.badge}>
-                      {val.tags.length > 0 && (
-                        <>
-                          <Badge pill variant="primary">
-                            <Link
-                              className={styles.navLink}
-                              to={"/post/" + val.tags[0].tag}
-                              onClick={updateCount}
-                            >
-                              {val.tags[0].tag}
-                            </Link>
-                          </Badge>{" "}
-                          <Badge pill variant="success">
-                            <Link
-                              className={styles.navLink}
-                              to={"/post/" + val.tags[1].tag}
-                              onClick={updateCount}
-                            >
-                              {val.tags[1].tag}
-                            </Link>
-                          </Badge>
-                          <br />
-                        </>
-                      )}
-                    </div>
-                    <CardContent>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        {val.description}
-                      </Typography>
-                    </CardContent>
-                    <CardActions disableSpacing className={classes.footer}>
-                      <IconButton
-                        aria-label="add to favorites"
-                        style={liked[ind] ? { color: "red" } : {}}
-                        onClick={(e) => {
-                          handleClick(val._id);
-                          updateCount();
-                          let temp = liked;
-                          temp[ind] = !liked[ind];
-                          setLiked(temp);
-                        }}
-                      >
-                        <FavoriteIcon />
-                      </IconButton>
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                      >
-                        {val.likes}
-                      </Typography>
-                      {!val.isFriend && (
+                          {val.description}
+                        </Typography>
+                      </CardContent>
+                      <CardActions disableSpacing className={classes.footer}>
                         <IconButton
-                          aria-label="Add Friend"
-                          onClick={() => {
-                            addFriend(val.user);
+                          aria-label="add to favorites"
+                          style={liked[ind] ? { color: "red" } : {}}
+                          onClick={(e) => {
+                            handleClick(val._id);
+                            updateCount();
+                            let temp = liked;
+                            temp[ind] = !liked[ind];
+                            setLiked(temp);
                           }}
                         >
-                          <PersonAddIcon />
+                          <FavoriteIcon />
                         </IconButton>
-                      )}
-                    </CardActions>
-                  </Card>
-                </Grid>
-              </>
-            );
-          })}
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {val.likes}
+                        </Typography>
+                        {!val.isFriend && (
+                          <IconButton
+                            aria-label="Add Friend"
+                            onClick={() => {
+                              addFriend(val.user);
+                            }}
+                          >
+                            <PersonAddIcon />
+                          </IconButton>
+                        )}
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                </>
+              );
+            })
+          ) : (
+            <div style={{ marginTop: "2rem" }}>
+              <Skeleton variant="text" />
+              <Skeleton variant="circle" width={70} height={70} />
+              <Skeleton variant="rect" width={900} height={1000} />
+            </div>
+          )}
         </Grid>
       </div>
       <StickyFooter />
+
+      {/* snackbar */}
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message="Friend Added"
+          action={
+            <React.Fragment>
+              <Button color="secondary" onClick={handleClose}>
+                UNDO
+              </Button>
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </React.Fragment>
+          }
+        />
+      </div>
     </>
   );
 };
