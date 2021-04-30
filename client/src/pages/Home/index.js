@@ -278,9 +278,6 @@ const Home = () => {
           message="Friend Added"
           action={
             <React.Fragment>
-              <Button color="secondary" onClick={handleClose}>
-                UNDO
-              </Button>
               <IconButton
                 size="small"
                 aria-label="close"
