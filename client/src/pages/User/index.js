@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { Typography, Avatar, TextField, Divider } from '@material-ui/core'
+import { Typography, Avatar, TextField, Divider, ListItem, List, ListItemText, ListItemAvatar } from '@material-ui/core'
 
 const User = () => {
     const [data, setData] = useState(null);
@@ -46,7 +46,7 @@ const User = () => {
     return (
         <>
             <Container className={styles.container}>
-                <Avatar style={{height: '150px', width: '150px'}} alt="Remy Sharp" src="https://swarmandsting.com/wp-content/uploads/getty-images/2017/07/1201019072.jpeg" />
+                <Avatar style={{ height: '150px', width: '150px' }} alt="Remy Sharp" src="https://swarmandsting.com/wp-content/uploads/getty-images/2017/07/1201019072.jpeg" />
                 <Typography variant="h4" component="h4">
                     {data.username}
                 </Typography>
@@ -63,47 +63,70 @@ const User = () => {
                         <p>Gender : {data.gender}</p>
                     </Col>
                 </Row>
-                <hr style={{ width:'100%' }}/>
+                <hr style={{ width: '100%' }} />
                 <Typography variant="h6" component="h6">
                     Add friends
                 </Typography>
-                <TextField className={styles.searchBox} id="outlined-basic" label="Enter UserId" variant="outlined" onChange={(e) => setUname(e.target.value)}/>
+                <TextField className={styles.searchBox} id="outlined-basic" label="Enter UserId" variant="outlined" onChange={(e) => setUname(e.target.value)} />
                 <Button variant="primary" onClick={handleClick}>
                     Submit
                 </Button>
-                <hr style={{ width:'100%' }}/>
+                <hr style={{ width: '100%' }} />
                 <Typography variant="h6" component="h6">
                     Friend List
                 </Typography>
-                <Row style={{ width: "700px" }}>
-                    {data.friends !== null && (
-                        <Table
-                            className={styles.table}
-                            responsive
-                            striped
-                            bordered
-                            hover
-                            variant="dark"
-                        >
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Friends</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {data.friends.map((ele, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td>{index + 1}</td>
-                                            <td>{ele.username}</td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </Table>
-                    )}
-                </Row>
+                {data.friends !== null && (
+                    // <Table
+                    //     className={styles.table}
+                    //     responsive
+                    //     striped
+                    //     bordered
+                    //     hover
+                    //     variant="dark"
+                    // >
+                    //     <thead>
+                    //         <tr>
+                    //             <th>#</th>
+                    //             <th>Friends</th>
+                    //         </tr>
+                    //     </thead>
+                    //     <tbody>
+                    //         {data.friends.map((ele, index) => {
+                    //             return (
+                    //                 <tr key={index}>
+                    //                     <td>{index + 1}</td>
+                    //                     <td>{ele.username}</td>
+                    //                 </tr>
+                    //             );
+                    //         })}
+                    //     </tbody>
+                    // </Table>
+                    <List>
+                        {data.friends.map((ele, index) => 
+                            (<ListItem alignItems="flex-start" key={index}>
+                                <ListItemAvatar>
+                                    <Avatar alt={ele.username} src=".." />
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={ele.username}
+                                    secondary={
+                                        <React.Fragment>
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                color="textPrimary"
+                                            >
+                                                {ele.email}
+                                            </Typography>
+                                            {' --- '}
+                                            {ele.createdAt.slice(0,10)}
+                                        </React.Fragment>
+                                    }
+                                />
+                            </ListItem>
+                        ))}
+                    </List>
+                )}
             </Container>
             {/* <Container className={styles.container}>
                 <Row>
