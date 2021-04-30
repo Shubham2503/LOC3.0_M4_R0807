@@ -19,8 +19,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
-    height: 570,
+    maxWidth: 900,
   },
   media: {
     height: 0,
@@ -40,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
     transform: "rotate(180deg)",
   },
   footer: {
-    position: "absolute",
     bottom: 0,
   },
 }));
