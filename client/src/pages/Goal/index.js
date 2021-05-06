@@ -16,233 +16,252 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-
+import { Helmet } from "react-helmet";
 const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
 }))(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
+    root: {
+        "&:nth-of-type(odd)": {
+            backgroundColor: theme.palette.action.hover,
+        },
     },
-  },
 }))(TableRow);
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
+    table: {
+        minWidth: 700,
+    },
 });
 
 function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+    return { name, calories, fat, carbs, protein };
 }
 
 const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
+    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+    createData("Eclair", 262, 16.0, 24, 6.0),
+    createData("Cupcake", 305, 3.7, 67, 4.3),
+    createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
 const Goal = () => {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
-  const [time, setTime] = useState("");
-  const [data, setData] = useState(null);
-  const [showNotification, setShowNotification] = useState(false);
-  const [show, setShow] = useState(false);
-  const [open, setOpen] = React.useState(false);
+    const [title, setTitle] = useState("");
+    const [desc, setDesc] = useState("");
+    const [time, setTime] = useState("");
+    const [data, setData] = useState(null);
+    const [showNotification, setShowNotification] = useState(false);
+    const [show, setShow] = useState(false);
+    const [open, setOpen] = React.useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-  console.log(Cookies.get("id"));
+    console.log(Cookies.get("id"));
 
-  const handleNotification = () => {
-    setShowNotification(true);
-    setTimeout(() => setShowNotification(false), 10);
-  };
+    const handleNotification = () => {
+        setShowNotification(true);
+        setTimeout(() => setShowNotification(false), 10);
+    };
 
-  const handleClick = async () => {
-    handleNotification();
-    await axios
-      .post(`/goals/${Cookies.get("id")}`, {
-        title,
-        description: desc,
-        time,
-      })
-      .then((res) => {
+    const handleClick = async () => {
+        handleNotification();
+        await axios
+            .post(`/goals/${Cookies.get("id")}`, {
+                title,
+                description: desc,
+                time,
+            })
+            .then((res) => {
+                getData();
+                handleClose();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        setOpen(true);
+    };
+
+    useEffect(() => {
         getData();
-        handleClose();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    setOpen(true);
-  };
+    }, []);
 
-  useEffect(() => {
-    getData();
-  }, []);
+    const handleSnackClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
 
-  const handleSnackClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+        setOpen(false);
+    };
 
-    setOpen(false);
-  };
+    const getData = async () => {
+        await axios
+            .get(`/goals/${Cookies.get("id")}`)
+            .then((res) => {
+                setData(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
-  const getData = async () => {
-    await axios
-      .get(`/goals/${Cookies.get("id")}`)
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    console.log(data);
+    const classes = useStyles();
 
-  console.log(data);
-  const classes = useStyles();
-
-  return (
-    <>
-      <div className={styles.container}>
-        <Notification
-          title={"Added Goal"}
-          msg={"Good to see that new goals are added"}
-          visible={showNotification}
-        />
-        <h2>Your Goals</h2>
-        <Button
-          variant="primary"
-          onClick={handleShow}
-          style={{ marginBottom: "1rem" }}
-        >
-          Add Goal
-        </Button>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Goal</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Form className="container">
-              <Form.Row>
-                <Form.Group as={Col}>
-                  <Form.Label>Title</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="title"
-                    placeholder="Enter title"
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </Form.Group>
-              </Form.Row>
-
-              <Form.Group>
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  placeholder="Add Description"
-                  onChange={(e) => setDesc(e.target.value)}
+    return (
+        <>
+            <div className="application">
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Goal</title>
+                    <link rel="canonical" href="http://mysite.com/example" />
+                </Helmet>
+            </div>
+            <div className={styles.container}>
+                <Notification
+                    title={"Added Goal"}
+                    msg={"Good to see that new goals are added"}
+                    visible={showNotification}
                 />
-              </Form.Group>
+                <h2>Your Goals</h2>
+                <Button
+                    variant="primary"
+                    onClick={handleShow}
+                    style={{ marginBottom: "1rem" }}
+                >
+                    Add Goal
+                </Button>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add Goal</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form className="container">
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label>Title</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        name="title"
+                                        placeholder="Enter title"
+                                        onChange={(e) =>
+                                            setTitle(e.target.value)
+                                        }
+                                    />
+                                </Form.Group>
+                            </Form.Row>
 
-              <Form.Group>
-                <Form.Label>Time</Form.Label>
-                <Form.Control
-                  type="time"
-                  onChange={(e) => setTime(e.target.value)}
+                            <Form.Group>
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    placeholder="Add Description"
+                                    onChange={(e) => setDesc(e.target.value)}
+                                />
+                            </Form.Group>
+
+                            <Form.Group>
+                                <Form.Label>Time</Form.Label>
+                                <Form.Control
+                                    type="time"
+                                    onChange={(e) => setTime(e.target.value)}
+                                />
+                            </Form.Group>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                        <Button variant="primary" onClick={handleClick}>
+                            Submit
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                {data ? (
+                    <>
+                        <TableContainer component={Paper}>
+                            <Table
+                                className={classes.table}
+                                aria-label="customized table"
+                            >
+                                <TableHead>
+                                    <TableRow>
+                                        <StyledTableCell>Title</StyledTableCell>
+
+                                        <StyledTableCell align="right">
+                                            Description
+                                        </StyledTableCell>
+                                        <StyledTableCell align="right">
+                                            Time
+                                        </StyledTableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {data.map((row) => (
+                                        <StyledTableRow>
+                                            <StyledTableCell
+                                                component="th"
+                                                scope="row"
+                                            >
+                                                {row.title}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="right">
+                                                {row.description}
+                                            </StyledTableCell>
+                                            <StyledTableCell align="right">
+                                                {row.time}
+                                            </StyledTableCell>
+                                        </StyledTableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </>
+                ) : (
+                    <div>
+                        <Skeleton variant="text" />
+                        <Skeleton variant="circle" width={40} height={40} />
+                        <Skeleton variant="rect" width={1200} height={118} />
+                    </div>
+                )}
+            </div>
+
+            <div>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                    }}
+                    open={open}
+                    autoHideDuration={6000}
+                    onClose={handleSnackClose}
+                    message="Goal Added"
+                    action={
+                        <React.Fragment>
+                            <IconButton
+                                size="small"
+                                aria-label="close"
+                                color="inherit"
+                                onClick={handleSnackClose}
+                            >
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                        </React.Fragment>
+                    }
                 />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClick}>
-              Submit
-            </Button>
-          </Modal.Footer>
-        </Modal>
-
-        {data ? (
-          <>
-            <TableContainer component={Paper}>
-              <Table className={classes.table} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Title</StyledTableCell>
-
-                    <StyledTableCell align="right">Description</StyledTableCell>
-                    <StyledTableCell align="right">Time</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {data.map((row) => (
-                    <StyledTableRow>
-                      <StyledTableCell component="th" scope="row">
-                        {row.title}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.description}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {row.time}
-                      </StyledTableCell>
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </>
-        ) : (
-          <div>
-            <Skeleton variant="text" />
-            <Skeleton variant="circle" width={40} height={40} />
-            <Skeleton variant="rect" width={1200} height={118} />
-          </div>
-        )}
-      </div>
-
-      <div>
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          open={open}
-          autoHideDuration={6000}
-          onClose={handleSnackClose}
-          message="Goal Added"
-          action={
-            <React.Fragment>
-              <IconButton
-                size="small"
-                aria-label="close"
-                color="inherit"
-                onClick={handleSnackClose}
-              >
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            </React.Fragment>
-          }
-        />
-      </div>
-    </>
-  );
+            </div>
+        </>
+    );
 };
 
 export default Goal;

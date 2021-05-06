@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import { makeStyles } from "@material-ui/core/styles";
 import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
+import { Helmet } from "react-helmet";
 import {
     Container,
     Grid,
@@ -58,6 +59,13 @@ const Createpost = () => {
 
     return (
         <>
+            <div className="application">
+                <Helmet>
+                    <meta charSet="utf-8" />
+                    <title>Create Post</title>
+                    <link rel="canonical" href="http://mysite.com/example" />
+                </Helmet>
+            </div>
             <div className={styles.container}>
                 <Modal show={show} onHide={() => setShow(false)}>
                     <Modal.Header closeButton>
